@@ -1,0 +1,147 @@
+/* =========================================================
+   ABOUT PAGE STYLES
+   ========================================================= */
+
+.page-hero {
+  padding: 170px 0 80px;
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(232, 207, 138, 0.12), transparent 55%),
+    var(--color-black);
+  border-bottom: 1px solid rgba(201,162,75,0.15);
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+  color: var(--color-cream);
+}
+
+.page-sub {
+  margin-top: 18px;
+  max-width: 560px;
+  color: var(--color-gray);
+  font-size: 1.05rem;
+}
+
+/* ---- Story ---- */
+.story { padding: var(--section-pad) 0; }
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+@media (max-width: 860px) {
+  .story-grid { grid-template-columns: 1fr; }
+}
+
+.story-media {
+  aspect-ratio: 4/3;
+  border: 1px solid rgba(201,162,75,0.2);
+  overflow: hidden;
+}
+
+.story-media img { width: 100%; height: 100%; object-fit: cover; }
+.story-media.img-fallback { background: var(--color-black-3); }
+.story-media.img-fallback img { display: none; }
+
+.story-copy p { color: var(--color-gray); margin-bottom: 18px; font-size: 1rem; }
+.story-copy p:last-child { margin-bottom: 0; }
+
+/* ---- Mission / Vision ---- */
+.mission { padding: var(--section-pad) 0; background: var(--color-black-2); }
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(201,162,75,0.18);
+  border: 1px solid rgba(201,162,75,0.18);
+}
+
+@media (max-width: 700px) {
+  .mission-grid { grid-template-columns: 1fr; }
+}
+
+.mission-card {
+  background: var(--color-black);
+  padding: 48px 44px;
+}
+
+.mission-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-cream);
+  margin-bottom: 16px;
+}
+
+.mission-card p { color: var(--color-gray); }
+
+/* ---- Milestones ---- */
+.milestones { padding: var(--section-pad) 0; }
+
+.milestone-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .milestone-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.milestone-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-weight: 600;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.milestone-label {
+  margin-top: 8px;
+  font-size: 0.86rem;
+  color: var(--color-gray);
+  letter-spacing: 0.02em;
+}
+
+/* ---- Values ---- */
+.values { padding: var(--section-pad) 0; background: var(--color-black-2); }
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+@media (max-width: 860px) {
+  .values-grid { grid-template-columns: 1fr; }
+}
+
+.value-item {
+  padding: 8px;
+  border-top: 1px solid rgba(201,162,75,0.3);
+}
+
+.value-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--color-gold);
+  margin: 18px 0 12px;
+}
+
+.value-item h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--color-cream);
+  margin-bottom: 12px;
+}
+
+.value-item p { color: var(--color-gray); font-size: 0.92rem; }

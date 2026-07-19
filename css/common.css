@@ -1,0 +1,444 @@
+/* =========================================================
+   RAJA PRIYA GROUP — COMMON STYLES
+   Shared across every page: tokens, navbar, footer, buttons
+   ========================================================= */
+
+/* ---- Design Tokens ---- */
+:root {
+  --color-black:      #0a0c10;
+  --color-black-2:    #12151b;
+  --color-black-3:    #1a1e26;
+  --color-gold:       #c9a24b;
+  --color-gold-light: #e8cf8a;
+  --color-gold-deep:  #7a5f22;
+  --color-cream:      #f3efe4;
+  --color-gray:       #9aa0ab;
+
+  --font-display: 'Fraunces', serif;
+  --font-body:    'Manrope', sans-serif;
+
+  --gradient-gold: linear-gradient(135deg, var(--color-gold-deep) 0%, var(--color-gold) 45%, var(--color-gold-light) 100%);
+
+  --container-width: 1180px;
+  --section-pad: 96px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 768px) {
+  :root { --section-pad: 56px; }
+}
+
+/* ---- Reset ---- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-black);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 640px) {
+  .container { padding: 0 20px; }
+}
+
+/* ---- Reduced motion respect ---- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+/* ---- Eyebrow / Section labels ---- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 18px;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+  color: var(--color-cream);
+}
+
+.section-sub {
+  color: var(--color-gray);
+  font-size: 1.05rem;
+  max-width: 620px;
+  margin-top: 18px;
+}
+
+/* ---- Skyline divider (signature motif) ----
+   A thin gold horizon silhouette used to separate sections,
+   echoing the crown/skyline mark in the logo. */
+.skyline-divider {
+  width: 100%;
+  height: 44px;
+  display: block;
+  color: var(--color-gold);
+  opacity: 0.55;
+}
+
+.skyline-divider path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+}
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 32px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border-radius: 2px;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), background 0.35s var(--ease), color 0.35s var(--ease);
+  white-space: nowrap;
+}
+
+.btn-gold {
+  background: var(--gradient-gold);
+  color: var(--color-black);
+  box-shadow: 0 8px 24px -8px rgba(201, 162, 75, 0.55);
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -8px rgba(201, 162, 75, 0.7);
+}
+
+.btn-outline {
+  border: 1px solid rgba(243, 239, 228, 0.35);
+  color: var(--color-cream);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 22px 0;
+  transition: background 0.4s var(--ease), padding 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+.navbar.is-scrolled {
+  background: rgba(10, 12, 16, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 14px 0;
+  box-shadow: 0 1px 0 rgba(201, 162, 75, 0.15);
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-brand img { height: 46px; width: auto; }
+
+.nav-brand-text {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-cream);
+  line-height: 1.1;
+}
+
+.nav-brand-text span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--color-gold);
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-links a {
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-cream);
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.3s var(--ease);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width 0.35s var(--ease);
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--color-gold-light); }
+.nav-links a:hover::after,
+.nav-links a.active::after { width: 100%; }
+
+.nav-cta { display: flex; align-items: center; gap: 20px; }
+.nav-cta .btn { padding: 11px 24px; font-size: 0.82rem; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1100;
+}
+.nav-toggle span {
+  width: 26px;
+  height: 2px;
+  background: var(--color-gold);
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+
+@media (max-width: 960px) {
+  .nav-links { display: none; }
+  .nav-cta .btn-outline { display: none; }
+  .nav-toggle { display: flex; }
+
+  .nav-links.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; right: 0;
+    width: min(320px, 80vw);
+    height: 100vh;
+    background: var(--color-black-2);
+    padding: 100px 40px 40px;
+    gap: 28px;
+    box-shadow: -8px 0 40px rgba(0,0,0,0.5);
+    border-left: 1px solid rgba(201,162,75,0.2);
+  }
+}
+
+/* =========================================================
+   FLOATING WHATSAPP BUTTON
+   ========================================================= */
+.whatsapp-float {
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  animation: float-pulse 2.6s ease-in-out infinite;
+}
+
+.whatsapp-float svg { width: 28px; height: 28px; fill: #fff; }
+
+@keyframes float-pulse {
+  0%, 100% { box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 0 0 rgba(37, 211, 102, 0.5); }
+  50% { box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 0 12px rgba(37, 211, 102, 0); }
+}
+
+/* =========================================================
+   CTA BANNER (shared across pages)
+   ========================================================= */
+.cta-banner {
+  background: var(--color-black-2);
+  border-top: 1px solid rgba(201,162,75,0.18);
+  border-bottom: 1px solid rgba(201,162,75,0.18);
+  padding: 42px 0;
+}
+
+.cta-banner .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.cta-info { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+
+.cta-item { display: flex; align-items: center; gap: 14px; }
+
+.cta-item .icon-circle {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--color-gold);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.cta-item .icon-circle svg { width: 22px; height: 22px; stroke: var(--color-gold); }
+
+.cta-item-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-gray); }
+.cta-item-value { font-family: var(--font-display); font-size: 1.15rem; color: var(--color-cream); font-weight: 600; }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+  background: var(--color-black);
+  padding-top: 72px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(243,239,228,0.1);
+}
+
+@media (max-width: 860px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+.footer-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.footer-brand-row img { height: 44px; }
+
+.footer-brand-row .nav-brand-text { font-size: 1.1rem; }
+
+.footer-col h4 {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 20px;
+}
+
+.footer-col p, .footer-col address {
+  color: var(--color-gray);
+  font-size: 0.92rem;
+  font-style: normal;
+  line-height: 1.8;
+}
+
+.footer-col ul li { margin-bottom: 12px; }
+
+.footer-col ul a {
+  color: var(--color-gray);
+  font-size: 0.92rem;
+  transition: color 0.3s var(--ease), padding-left 0.3s var(--ease);
+}
+
+.footer-col ul a:hover { color: var(--color-gold-light); padding-left: 4px; }
+
+.footer-social { display: flex; gap: 12px; margin-top: 20px; }
+
+.footer-social a {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,162,75,0.35);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.footer-social a svg { width: 16px; height: 16px; fill: var(--color-gold); }
+.footer-social a:hover { background: var(--color-gold); border-color: var(--color-gold); }
+.footer-social a:hover svg { fill: var(--color-black); }
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 26px 0;
+  font-size: 0.82rem;
+  color: var(--color-gray);
+}
+
+.footer-bottom .tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--color-gold-light);
+}
+
+/* ---- Scroll reveal utility ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Focus visibility (accessibility) ---- */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
