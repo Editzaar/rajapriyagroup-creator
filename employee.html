@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Workspace — Raja Priya Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- PIN GATE -->
+<div class="pin-gate" id="empPinGate">
+  <div class="pin-gate-card">
+    <div class="pin-gate-logo">👔 Employee Login</div>
+    <div class="pin-gate-sub">Raja Priya Group — Staff Workspace</div>
+    <input type="password" class="pin-gate-input" id="empPinInput" placeholder="Enter PIN or Password" autocomplete="off">
+    <button class="pin-gate-btn" id="empPinBtn">Access Workspace</button>
+    <div class="pin-gate-error" id="empPinError"></div>
+    <p style="margin-top:16px;font-size:0.75rem;color:var(--color-gray)">Contact your administrator if you need access.</p>
+  </div>
+</div>
+
+<!-- EMPLOYEE LAYOUT (hidden until PIN verified) -->
+<div class="admin-layout" id="empLayout" style="display:none">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <div>
+        <span class="logo-mark">Raja Priya GROUP</span>
+        <span class="logo-sub">Employee Workspace</span>
+      </div>
+    </div>
+    <div class="admin-role-badge employee">👔 Employee</div>
+
+    <div class="admin-nav-section">Modules</div>
+    <div class="admin-nav-item active" data-tab="dashboard" data-perm="all" id="empNav-dashboard">
+      <span>📊</span> Dashboard
+    </div>
+    <div class="admin-nav-item" data-tab="clients" data-perm="view_clients" id="empNav-clients">
+      <span>👥</span> Clients
+    </div>
+    <div class="admin-nav-item" data-tab="bookings" data-perm="manage_bookings" id="empNav-bookings">
+      <span>📦</span> Bookings
+    </div>
+    <div class="admin-nav-item" data-tab="chat" data-perm="chat_with_clients" id="empNav-chat">
+      <span>💬</span> Client Chat
+      <span class="admin-nav-badge" id="empChatBadge" style="display:none">0</span>
+    </div>
+    <div class="admin-nav-item" data-tab="announcements" data-perm="post_announcements" id="empNav-announcements">
+      <span>📢</span> Announcements
+    </div>
+    <div class="admin-nav-item" data-tab="projects" data-perm="manage_projects" id="empNav-projects">
+      <span>🏗️</span> Projects
+    </div>
+    <div class="admin-nav-item" data-tab="payments" data-perm="view_payments" id="empNav-payments">
+      <span>💰</span> Payments
+    </div>
+
+    <div class="admin-logout-area">
+      <div id="empInfo" style="font-size:0.8rem;color:var(--color-gray);margin-bottom:10px;text-align:center"></div>
+      <button class="admin-logout-btn" id="empLogoutBtn">🚪 Log Out</button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="admin-content">
+
+    <!-- DASHBOARD -->
+    <div class="admin-panel active" id="emp-tab-dashboard">
+      <div class="admin-page-header">
+        <div><h2>Welcome, <span id="empWelcomeName">Employee</span>!</h2><p>Your workspace — <span id="empDept"></span></p></div>
+      </div>
+      <div class="admin-stats-grid" id="empStats">
+        <div class="admin-stat-card"><div class="stat-icon">👥</div><div class="stat-val" id="emp-stat-clients">-</div><div class="stat-lbl">Total Clients</div></div>
+        <div class="admin-stat-card"><div class="stat-icon">📦</div><div class="stat-val" id="emp-stat-bookings">-</div><div class="stat-lbl">Total Bookings</div></div>
+        <div class="admin-stat-card"><div class="stat-icon">💬</div><div class="stat-val" id="emp-stat-chats">-</div><div class="stat-lbl">Active Chats</div></div>
+      </div>
+    </div>
+
+    <!-- CLIENTS -->
+    <div class="admin-panel" id="emp-tab-clients">
+      <div class="admin-page-header">
+        <div><h2>Client Manager</h2><p>View and manage registered clients.</p></div>
+      </div>
+      <div class="admin-table-wrap">
+        <div class="admin-table-toolbar">
+          <h3>All Clients</h3>
+          <input type="text" class="admin-search" id="empClientSearch" placeholder="🔍 Search clients...">
+        </div>
+        <table class="admin-table">
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>City</th><th>Interest</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="empClientsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- BOOKINGS -->
+    <div class="admin-panel" id="emp-tab-bookings">
+      <div class="admin-page-header">
+        <div><h2>Booking Manager</h2><p>Create and manage client bookings.</p></div>
+        <button class="btn-admin-gold" id="empNewBookingBtn">+ New Booking</button>
+      </div>
+      <div class="admin-table-wrap">
+        <div class="admin-table-toolbar"><h3>All Bookings</h3></div>
+        <table class="admin-table">
+          <thead><tr><th>ID</th><th>Client</th><th>Project</th><th>Total</th><th>Paid</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+          <tbody id="empBookingsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CHAT -->
+    <div class="admin-panel" id="emp-tab-chat">
+      <div class="admin-page-header"><div><h2>Client Chat</h2><p>Communicate with your assigned clients.</p></div></div>
+      <div class="chat-split">
+        <div class="chat-client-list">
+          <div class="chat-client-list-header">💬 Conversations</div>
+          <div id="empChatClientList"></div>
+        </div>
+        <div class="chat-window">
+          <div class="chat-window-header" id="empChatHeader">Select a client to chat</div>
+          <div class="chat-window-messages" id="empChatMessages">
+            <div class="empty-state"><div class="empty-icon">💬</div><p>Select a client to start chatting.</p></div>
+          </div>
+          <div class="chat-window-input" id="empChatInputArea" style="display:none">
+            <input type="text" id="empChatInput" placeholder="Type a message...">
+            <button class="btn-admin-gold" id="empChatSendBtn">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANNOUNCEMENTS -->
+    <div class="admin-panel" id="emp-tab-announcements">
+      <div class="admin-page-header">
+        <div><h2>Announcements</h2><p>Post announcements visible to all clients.</p></div>
+        <button class="btn-admin-gold" id="empNewAnnBtn">+ New Announcement</button>
+      </div>
+      <div id="empAnnList"></div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="admin-panel" id="emp-tab-projects">
+      <div class="admin-page-header">
+        <div><h2>Projects CMS</h2><p>Manage projects shown on the website.</p></div>
+        <button class="btn-admin-gold" id="empNewProjectBtn">+ Add Project</button>
+      </div>
+      <div id="empProjectList"></div>
+    </div>
+
+    <!-- PAYMENTS -->
+    <div class="admin-panel" id="emp-tab-payments">
+      <div class="admin-page-header"><div><h2>Payment Overview</h2><p>View all client booking payments.</p></div></div>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead><tr><th>Booking ID</th><th>Client</th><th>Project</th><th>Total</th><th>Paid</th><th>Balance</th><th>Method & Ref</th><th>Status</th></tr></thead>
+          <tbody id="empPaymentsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modals -->
+<div class="admin-modal-backdrop" id="empBookingModal">
+  <div class="admin-modal-box">
+    <div class="admin-modal-title">New Booking</div>
+    <div class="admin-form-group"><label>Client</label><select id="mbClientId"></select></div>
+    <div class="admin-form-group"><label>Project Name</label><input type="text" id="mbProjectName" placeholder="e.g. Villa Plot - Phase 2"></div>
+    <div class="admin-form-group"><label>Type</label>
+      <select id="mbType"><option>Real Estate</option><option>Construction</option><option>Brand Promotion</option><option>Social Media</option><option>Training</option></select>
+    </div>
+    <div class="admin-form-group"><label>Total Amount (₹)</label><input type="number" id="mbTotal" placeholder="500000"></div>
+    <div class="admin-form-group"><label>Amount Paid (₹)</label><input type="number" id="mbPaid" placeholder="0"></div>
+    <div class="admin-form-group"><label>Notes</label><textarea id="mbNotes" placeholder="Any notes..."></textarea></div>
+    <div class="admin-modal-actions">
+      <button class="btn-modal-cancel" id="empBookingModalClose">Cancel</button>
+      <button class="btn-admin-gold" id="empBookingSaveBtn">Create Booking</button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-modal-backdrop" id="empAnnModal">
+  <div class="admin-modal-box">
+    <div class="admin-modal-title">New Announcement</div>
+    <div class="admin-form-group"><label>Title</label><input type="text" id="annTitle" placeholder="Announcement title"></div>
+    <div class="admin-form-group"><label>Body</label><textarea id="annBody" placeholder="Write your announcement..."></textarea></div>
+    <div class="admin-modal-actions">
+      <button class="btn-modal-cancel" id="empAnnModalClose">Cancel</button>
+      <button class="btn-admin-gold" id="empAnnSaveBtn">Post Announcement</button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-modal-backdrop" id="empProjectModal">
+  <div class="admin-modal-box">
+    <div class="admin-modal-title">Add / Edit Project</div>
+    <input type="hidden" id="prjId">
+    <div class="admin-form-group"><label>Project Title</label><input type="text" id="prjTitle"></div>
+    <div class="admin-form-group"><label>Category</label>
+      <select id="prjCategory"><option>Plots</option><option>Villa</option><option>Commercial</option><option>Construction</option></select>
+    </div>
+    <div class="admin-form-group"><label>Location</label><input type="text" id="prjLocation" placeholder="e.g. Hyderabad, Telangana"></div>
+    <div class="admin-form-group"><label>Price</label><input type="text" id="prjPrice" placeholder="e.g. ₹25 Lakhs onwards"></div>
+    <div class="admin-form-group"><label>Status</label>
+      <select id="prjStatus"><option>Available</option><option>Sold Out</option><option>Coming Soon</option></select>
+    </div>
+    <div class="admin-form-group"><label>Description</label><textarea id="prjDesc"></textarea></div>
+    <div class="admin-modal-actions">
+      <button class="btn-modal-cancel" id="empProjectModalClose">Cancel</button>
+      <button class="btn-admin-gold" id="empProjectSaveBtn">Save Project</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="js/data.js"></script>
+<script src="js/employee.js"></script>
+</body>
+</html>

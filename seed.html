@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo Seed — Raja Priya Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0a0c10;
+    color: #f3efe4;
+    font-family: 'Manrope', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    background: #12151b;
+    border: 1px solid rgba(201,162,75,0.25);
+    border-radius: 16px;
+    padding: 36px;
+    max-width: 560px;
+    width: 100%;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  }
+  h1 { font-size: 1.6rem; color: #c9a24b; margin-bottom: 6px; }
+  .sub { font-size: 0.85rem; color: #9aa0ab; margin-bottom: 28px; }
+  .step { padding: 12px 16px; background: #1a1e26; border-radius: 8px; margin-bottom: 10px; font-size: 0.88rem; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,0.05); }
+  .step-icon { font-size: 1.1rem; }
+  .step-text { color: #9aa0ab; }
+  .step.done .step-text { color: #51cf66; }
+  .step.done { border-color: rgba(40,167,69,0.2); background: rgba(40,167,69,0.06); }
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #7a5f22 0%, #c9a24b 45%, #e8cf8a 100%);
+    color: #0a0c10;
+    font-weight: 800;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.2s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+  .link-btn { padding: 10px; background: rgba(201,162,75,0.1); border: 1px solid rgba(201,162,75,0.25); border-radius: 8px; color: #c9a24b; text-align: center; text-decoration: none; font-size: 0.82rem; font-weight: 700; transition: all 0.2s ease; }
+  .link-btn:hover { background: rgba(201,162,75,0.2); }
+  .cred-box { background: #1a1e26; border: 1px solid rgba(201,162,75,0.2); border-radius: 8px; padding: 14px; margin-top: 16px; font-size: 0.82rem; }
+  .cred-box h3 { color: #c9a24b; margin-bottom: 8px; font-size: 0.88rem; }
+  .cred-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: #9aa0ab; }
+  .cred-row:last-child { border: none; }
+  .cred-val { color: #e8cf8a; font-weight: 700; font-family: monospace; }
+  #statusMsg { margin-top: 14px; font-size: 0.88rem; color: #51cf66; text-align: center; min-height: 20px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🌱 Demo Data Seed</h1>
+  <p class="sub">Click the button to populate all portals with realistic demo data and verify all functions work.</p>
+
+  <div class="step" id="step1"><span class="step-icon">👥</span><span class="step-text">3 Demo Clients with profiles</span></div>
+  <div class="step" id="step2"><span class="step-icon">🧑‍💼</span><span class="step-text">2 Demo Employees with different permissions</span></div>
+  <div class="step" id="step3"><span class="step-icon">📦</span><span class="step-text">5 Bookings across clients</span></div>
+  <div class="step" id="step4"><span class="step-icon">📚</span><span class="step-text">3 Training sessions</span></div>
+  <div class="step" id="step5"><span class="step-icon">📢</span><span class="step-text">2 Announcements</span></div>
+  <div class="step" id="step6"><span class="step-icon">🏗️</span><span class="step-text">4 Projects in CMS</span></div>
+  <div class="step" id="step7"><span class="step-icon">💬</span><span class="step-text">Demo chat messages</span></div>
+  <div class="step" id="step8"><span class="step-icon">🔍</span><span class="step-text">Audit log entries</span></div>
+
+  <button class="btn" id="seedBtn" onclick="seedAll()">🚀 Seed All Demo Data</button>
+  <div id="statusMsg"></div>
+
+  <div class="cred-box" id="credBox" style="display:none">
+    <h3>🔑 Login Credentials</h3>
+    <div class="cred-row"><span>Client 1</span><span class="cred-val">rahul@demo.com / demo123</span></div>
+    <div class="cred-row"><span>Client 2</span><span class="cred-val">priya@demo.com / demo123</span></div>
+    <div class="cred-row"><span>Client 3</span><span class="cred-val">arjun@demo.com / demo123</span></div>
+    <div class="cred-row"><span>Employee (Sales)</span><span class="cred-val">PIN: sales2026</span></div>
+    <div class="cred-row"><span>Employee (Chat Only)</span><span class="cred-val">PIN: chat2026</span></div>
+    <div class="cred-row"><span>Owner Password</span><span class="cred-val">RPGowner@2026</span></div>
+  </div>
+
+  <div class="links" id="navLinks" style="display:none">
+    <a href="index.html" class="link-btn">🌐 Website</a>
+    <a href="dashboard.html" class="link-btn">👤 Client Dashboard</a>
+    <a href="employee.html" class="link-btn">🧑‍💼 Employee Panel</a>
+    <a href="owner.html" class="link-btn">👑 Owner Panel</a>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script>
+function seedAll() {
+  const btn = document.getElementById('seedBtn');
+  btn.disabled = true;
+  btn.textContent = 'Seeding...';
+
+  try {
+    // Clear old demo data but keep owner password
+    const ownerPw = RPG.Owner.getPassword();
+    ['rpg_users','rpg_employees','rpg_bookings','rpg_training','rpg_announcements','rpg_projects_cms','rpg_chats','rpg_audit_log','rpg_notifications'].forEach(k => localStorage.removeItem(k));
+
+    const now = new Date();
+    function daysAgo(d) { const t=new Date(now); t.setDate(t.getDate()-d); return t.toLocaleString('en-IN',{hour12:true}); }
+
+    // Step 1: Clients
+    step(1);
+    const c1 = RPG.Users.create({ name: 'Rahul Sharma', email: 'rahul@demo.com', phone: '+91 9876543210', profession: 'Business Owner', city: 'Hyderabad', interest: 'Property Buyer', password: 'demo123' });
+    const c2 = RPG.Users.create({ name: 'Priya Reddy', email: 'priya@demo.com', phone: '+91 9123456780', profession: 'Software Engineer', city: 'Secunderabad', interest: 'Construction Client', password: 'demo123' });
+    const c3 = RPG.Users.create({ name: 'Arjun Mehta', email: 'arjun@demo.com', phone: '+91 9988776655', profession: 'Marketing Director', city: 'Hyderabad', interest: 'Business Brand', password: 'demo123' });
+    done(1);
+
+    // Step 2: Employees
+    step(2);
+    const e1 = RPG.Employees.create({ name: 'Ravi Kumar', email: 'ravi@rpgroup.com', department: 'Sales & Bookings', pin: 'sales2026', permissions: { view_clients: true, view_client_details: true, manage_bookings: true, manage_projects: true, chat_with_clients: true, post_announcements: true, view_payments: true, view_reports: true }});
+    const e2 = RPG.Employees.create({ name: 'Sneha Patel', email: 'sneha@rpgroup.com', department: 'Customer Support', pin: 'chat2026', permissions: { view_clients: true, view_client_details: false, manage_bookings: false, manage_projects: false, chat_with_clients: true, post_announcements: false, view_payments: false, view_reports: false }});
+    done(2);
+
+    // Step 3: Bookings
+    step(3);
+    const b1 = RPG.Bookings.create({ clientId: c1.id, projectName: 'Green Valley Plots — Phase 2', type: 'Real Estate', totalAmount: 1500000, paidAmount: 750000, status: 'In Progress', notes: 'Plot No. 42, 200 sq yards' });
+    const b2 = RPG.Bookings.create({ clientId: c1.id, projectName: 'Villa Construction — Miyapur', type: 'Construction', totalAmount: 4500000, paidAmount: 1000000, status: 'Confirmed', notes: 'Ground + 2 floors, 2400 sqft' });
+    const b3 = RPG.Bookings.create({ clientId: c2.id, projectName: 'Sunrise Residency — 3BHK', type: 'Real Estate', totalAmount: 8500000, paidAmount: 8500000, status: 'Completed', notes: 'Flat 4B, 3rd floor' });
+    const b4 = RPG.Bookings.create({ clientId: c2.id, projectName: 'Office Renovation — Gachibowli', type: 'Construction', totalAmount: 950000, paidAmount: 300000, status: 'Pending', notes: '1800 sqft office space' });
+    const b5 = RPG.Bookings.create({ clientId: c3.id, projectName: 'Brand Identity Package — Premium', type: 'Brand Promotion', totalAmount: 85000, paidAmount: 42500, status: 'In Progress', notes: 'Logo, stationery, social media kit' });
+    done(3);
+
+    // Step 4: Training
+    step(4);
+    RPG.Training.create({ clientId: c1.id, title: 'Real Estate Investment Masterclass', description: 'Learn how to evaluate plots, legal checks, ROI calculation and best areas in Hyderabad.', progress: 65, status: 'In Progress' });
+    RPG.Training.create({ clientId: c3.id, title: 'Digital Brand Building Workshop', description: 'Complete guide to building your brand on Instagram, Facebook & LinkedIn for maximum reach.', progress: 100, status: 'Completed' });
+    RPG.Training.create({ clientId: c2.id, title: 'Construction Project Management', description: 'Understand construction timelines, material costs, contractor selection, and quality control.', progress: 20, status: 'In Progress' });
+    done(4);
+
+    // Step 5: Announcements
+    step(5);
+    RPG.Announcements.create({ title: '🎉 New Project Launch: Green Valley Phase 3', body: 'We are excited to announce the launch of Green Valley Phase 3 in Bachupally. Premium plots starting from ₹18 Lakhs. Limited plots available — register your interest today!', postedBy: 'Raja Priya Group Team', createdAt: daysAgo(2) });
+    RPG.Announcements.create({ title: '🏖️ Summer Festival Offer — 10% Off Construction Services', body: 'Book any construction project before 31st August 2026 and get 10% off on total project cost. Offer valid for new bookings only.', postedBy: 'Owner', createdAt: daysAgo(5) });
+    done(5);
+
+    // Step 6: Projects CMS
+    step(6);
+    RPG.ProjectsCMS.create({ title: 'Green Valley Plots — Phase 2', category: 'Plots', location: 'Bachupally, Hyderabad', price: '₹18 Lakhs onwards', status: 'Available', description: 'Premium gated community plots with all amenities. HMDA approved. Immediate registration.' });
+    RPG.ProjectsCMS.create({ title: 'Sunrise Residency', category: 'Villa', location: 'Kondapur, Hyderabad', price: '₹75 Lakhs onwards', status: 'Available', description: 'Luxury 3BHK & 4BHK villas with clubhouse, swimming pool, and 24/7 security.' });
+    RPG.ProjectsCMS.create({ title: 'Metro Commercial Hub', category: 'Commercial', location: 'Gachibowli, Hyderabad', price: '₹1.2 Cr onwards', status: 'Sold Out', description: 'Premium office spaces and retail shops in Hyderabad\'s fastest growing IT corridor.' });
+    RPG.ProjectsCMS.create({ title: 'Royal Enclave Villas', category: 'Villa', location: 'Narsingi, Hyderabad', price: '₹95 Lakhs onwards', status: 'Coming Soon', description: 'Exclusive gated community with 50 premium villas. North and East facing plots available.' });
+    done(6);
+
+    // Step 7: Chat messages
+    step(7);
+    RPG.Chat.sendMessage(c1.id, c1.id, 'Rahul Sharma', 'client', 'Hello, I wanted to know the current status of my Green Valley plot registration?');
+    RPG.Chat.sendMessage(c1.id, e1.id, 'Ravi Kumar', 'employee', 'Hi Rahul! Good news — your plot registration is in progress. All documents have been verified. Expected completion: 5th August 2026.');
+    RPG.Chat.sendMessage(c1.id, c1.id, 'Rahul Sharma', 'client', 'That is great! What about the villa construction project? When does that start?');
+    RPG.Chat.sendMessage(c1.id, e1.id, 'Ravi Kumar', 'employee', 'The foundation work for your villa is scheduled to begin on 10th August. Our site engineer will call you 2 days before to confirm.');
+    RPG.Chat.sendMessage(c2.id, c2.id, 'Priya Reddy', 'client', 'Hi team, can I get an update on the office renovation timeline?');
+    RPG.Chat.sendMessage(c2.id, e2.id, 'Sneha Patel', 'employee', 'Hi Priya! Your project is currently under review. Our design team will share the floor plan by this weekend.');
+    RPG.Chat.sendMessage(c3.id, c3.id, 'Arjun Mehta', 'client', 'When will I receive the first draft of my brand identity package?');
+    RPG.Chat.sendMessage(c3.id, e1.id, 'Ravi Kumar', 'employee', 'Hi Arjun! The logo concepts are ready. I will share 3 options with you on WhatsApp today by 5 PM.');
+    done(7);
+
+    // Step 8: Audit log
+    step(8);
+    RPG.AuditLog.add(e1.id, 'Ravi Kumar', 'Booking Created', 'Booking BK001 created for Rahul Sharma — Green Valley Plots Phase 2.');
+    RPG.AuditLog.add(e1.id, 'Ravi Kumar', 'Booking Created', 'Booking BK002 created for Rahul Sharma — Villa Construction Miyapur.');
+    RPG.AuditLog.add(e1.id, 'Ravi Kumar', 'Booking Updated', 'Booking BK001 status changed to "In Progress".');
+    RPG.AuditLog.add(e1.id, 'Ravi Kumar', 'Chat Message Sent', 'Sent message to client Rahul Sharma.');
+    RPG.AuditLog.add(e1.id, 'Ravi Kumar', 'Announcement Posted', 'Posted: "New Project Launch: Green Valley Phase 3".');
+    RPG.AuditLog.add(e2.id, 'Sneha Patel', 'Chat Message Sent', 'Sent message to client Priya Reddy.');
+    RPG.AuditLog.add(e2.id, 'Sneha Patel', 'Login', 'Employee logged into workspace.');
+    RPG.AuditLog.add(e1.id, 'Ravi Kumar', 'Project Created', 'Created project "Green Valley Plots Phase 2".');
+    done(8);
+
+    // Notifications
+    RPG.Notifications.add(c1.id, 'Your booking BK001 status updated to "In Progress".');
+    RPG.Notifications.add(c1.id, 'New announcement: Green Valley Phase 3 Launch!');
+    RPG.Notifications.add(c2.id, 'Your booking BK003 is Completed. Thank you!');
+    RPG.Notifications.add(c3.id, 'Your training "Digital Brand Building Workshop" is now 100% complete!');
+
+    // Auto-login as Rahul for demo
+    RPG.Session.setClient(c1);
+
+    btn.textContent = '✅ Demo Data Seeded!';
+    btn.style.background = 'linear-gradient(135deg,#1a6b2a,#28a745)';
+    document.getElementById('statusMsg').textContent = '✅ All demo data loaded! Auto-logged in as Rahul Sharma (Client 1).';
+    document.getElementById('credBox').style.display = 'block';
+    document.getElementById('navLinks').style.display = 'grid';
+
+  } catch(err) {
+    document.getElementById('statusMsg').style.color = '#ff6b6b';
+    document.getElementById('statusMsg').textContent = '❌ Error: ' + err.message;
+    btn.disabled = false;
+    btn.textContent = '🔄 Retry Seed';
+    console.error(err);
+  }
+}
+
+function step(n) {
+  const el = document.getElementById('step'+n);
+  if (el) el.querySelector('.step-text').textContent = '⏳ ' + el.querySelector('.step-text').textContent.replace('⏳ ','');
+}
+
+function done(n) {
+  const el = document.getElementById('step'+n);
+  if (el) {
+    el.classList.add('done');
+    const t = el.querySelector('.step-text');
+    if (t) t.textContent = '✅ ' + t.textContent.replace('⏳ ','');
+  }
+}
+</script>
+</body>
+</html>

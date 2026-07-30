@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Dashboard — Raja Priya Group</title>
+<meta name="description" content="Your personal client dashboard — track bookings, payments, training, and chat with the Raja Priya Group team.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/auth.css">
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<!-- Navbar (minimal) -->
+<header class="navbar">
+  <div class="container">
+    <a href="index.html" class="nav-brand">
+      <img src="images/logo.png" alt="Raja Priya Group" onerror="this.style.display='none'">
+      <span class="nav-brand-text">Raja Priya<span>GROUP</span></span>
+    </a>
+    <div class="nav-cta" style="margin-left:auto;"></div>
+  </div>
+</header>
+
+<div class="dash-layout">
+  <!-- Sidebar -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar-header">
+      <div class="dash-avatar-circle" id="dashAvatar">R</div>
+      <div class="user-name-text" id="dashUserName">Loading...</div>
+      <div class="user-role-text" id="dashUserRole">Member</div>
+    </div>
+
+    <nav>
+      <div class="dash-nav-item active" data-panel="overview">
+        <span class="nav-icon">📊</span> Overview
+      </div>
+      <div class="dash-nav-item" data-panel="book">
+        <span class="nav-icon">🛒</span> Book a Service
+      </div>
+      <div class="dash-nav-item" data-panel="bookings">
+        <span class="nav-icon">📦</span> My Bookings
+        <span class="dash-nav-badge" id="bookingCountBadge" style="display:none">0</span>
+      </div>
+      <div class="dash-nav-item" data-panel="payments">
+        <span class="nav-icon">💰</span> My Payments
+      </div>
+      <div class="dash-nav-item" data-panel="training">
+        <span class="nav-icon">📚</span> My Training
+      </div>
+      <div class="dash-nav-item" data-panel="announcements">
+        <span class="nav-icon">📢</span> Announcements
+      </div>
+      <div class="dash-nav-item" data-panel="notifications">
+        <span class="nav-icon">🔔</span> Notifications
+        <span class="dash-nav-badge" id="notifBadge" style="display:none">0</span>
+      </div>
+      <div class="dash-nav-item" data-panel="chat">
+        <span class="nav-icon">💬</span> Chat with Team
+        <span class="dash-nav-badge" id="chatBadge" style="display:none">0</span>
+      </div>
+      <div class="dash-nav-item" data-panel="profile">
+        <span class="nav-icon">👤</span> My Profile
+      </div>
+    </nav>
+
+    <button class="dash-logout-btn" id="dashLogoutBtn">🚪 Log Out</button>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dash-content">
+
+    <!-- OVERVIEW -->
+    <div class="dash-panel active" id="panel-overview">
+      <h2 class="dash-panel-title">Welcome back, <span id="overviewName">-</span>! 👋</h2>
+      <p class="dash-panel-sub">Here's a summary of your activity with Raja Priya Group.</p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📦</div>
+          <div class="stat-value" id="stat-bookings">0</div>
+          <div class="stat-label">Total Bookings</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-value" id="stat-completed">0</div>
+          <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">💰</div>
+          <div class="stat-value" id="stat-paid">₹0</div>
+          <div class="stat-label">Amount Paid</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📋</div>
+          <div class="stat-value" id="stat-balance">₹0</div>
+          <div class="stat-label">Balance Due</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📚</div>
+          <div class="stat-value" id="stat-training">0</div>
+          <div class="stat-label">Training Sessions</div>
+        </div>
+      </div>
+
+      <div class="section-card" id="newClientQuickBanner" style="background: linear-gradient(135deg, rgba(201,162,75,0.12) 0%, rgba(20,24,33,0.9) 100%); border: 1px solid rgba(201,162,75,0.3); margin-bottom: 24px;">
+        <h3 style="color:var(--color-gold); border:none; padding:0; margin-bottom:8px;">🚀 Quick Actions for New Members</h3>
+        <p style="color:var(--color-cream); font-size:0.9rem; margin-bottom:16px;">Welcome to Raja Priya Group! You can now book services, make initial advance payments, track your projects, and chat directly with your assigned project manager.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button class="btn-admin-gold" onclick="switchClientTab('book')">🛒 Book a Service / Project</button>
+          <button class="btn-modal-cancel" onclick="switchClientTab('chat')">💬 Chat with Team</button>
+          <button class="btn-modal-cancel" onclick="switchClientTab('announcements')">📢 View Announcements</button>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>📢 Latest Announcements</h3>
+        <div id="overviewAnnouncements"></div>
+      </div>
+    </div>
+
+    <!-- BOOK A SERVICE & PAYMENTS -->
+    <div class="dash-panel" id="panel-book">
+      <h2 class="dash-panel-title">Book a Service & Online Payment</h2>
+      <p class="dash-panel-sub">Select a service or project, choose your payment mode, and submit your booking.</p>
+      
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div class="section-card">
+          <h3>Request New Booking</h3>
+          <form id="clientBookForm" class="profile-form" style="max-width:100%;">
+            <div class="form-group">
+              <label>Service Category</label>
+              <select id="bookServiceType" class="admin-search" style="width:100%; padding:10px;">
+                <option value="Real Estate">Real Estate / Plot Booking</option>
+                <option value="Construction">Villa / Building Construction</option>
+                <option value="Brand Promotion">Brand Promotion / Marketing</option>
+                <option value="Social Media">Social Media Management</option>
+                <option value="Training">Personalized Training Session</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Project / Service Name</label>
+              <input type="text" id="bookProjectName" placeholder="e.g. Green Valley Plot #45 or Villa Construction" required>
+            </div>
+            <div class="form-group">
+              <label>Estimated Total Budget (₹)</label>
+              <input type="number" id="bookAmount" placeholder="e.g. 500000" required>
+            </div>
+            <div class="form-group">
+              <label>Advance Payment Amount (₹)</label>
+              <input type="number" id="bookAdvance" placeholder="e.g. 50000" value="5000" required>
+            </div>
+            <div class="form-group">
+              <label>Payment Method</label>
+              <select id="bookPayMethod" class="admin-search" style="width:100%; padding:10px;">
+                <option value="UPI / PhonePe / GPay">📱 UPI / PhonePe / GPay / Paytm</option>
+                <option value="Credit / Debit Card">💳 Credit / Debit Card Online</option>
+                <option value="Bank NEFT / RTGS">🏦 Bank Transfer (NEFT / RTGS)</option>
+                <option value="Cash / Cheque">💵 Cash / Cheque on Site</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Transaction Ref / UTR / Note (Optional)</label>
+              <input type="text" id="bookTxnId" placeholder="e.g. UPI Ref #123456789 or Cheque #000123">
+            </div>
+            <div class="form-group">
+              <label>Additional Notes</label>
+              <textarea id="bookNotes" class="admin-search" style="width:100%; min-height:70px; padding:10px;" placeholder="Any specific requirements..."></textarea>
+            </div>
+            <button type="submit" class="profile-save-btn" style="margin-top:10px; width:100%; text-align:center;">💳 Submit Booking & Payment Request →</button>
+            <p id="bookSuccessMsg" style="color:#51cf66; font-size:0.88rem; margin-top:8px; display:none; text-align:center;">✅ Booking request & payment details submitted successfully!</p>
+          </form>
+        </div>
+
+        <div class="section-card">
+          <h3>💳 Payment Methods & QR Code</h3>
+          <p style="color:var(--color-gray); font-size:0.88rem; margin-bottom:16px;">
+            Choose your preferred method below to make an advance payment for your booking:
+          </p>
+          
+          <div style="background:var(--color-black-3); padding:16px; border-radius:10px; border:1px solid rgba(201,162,75,0.25); margin-bottom:16px;">
+            <div style="font-weight:700; color:var(--color-gold); margin-bottom:8px; font-size:0.95rem;">📱 UPI Payment Details</div>
+            <div style="font-size:0.85rem; color:var(--color-cream); line-height:1.6;">
+              <strong>UPI ID:</strong> <span style="color:var(--color-gold); font-family:monospace;">rajapriyagroup@upi</span><br>
+              <strong>GPay / PhonePe / Paytm:</strong> +91 9476766340
+            </div>
+          </div>
+
+          <div style="background:var(--color-black-3); padding:16px; border-radius:10px; border:1px solid rgba(201,162,75,0.25); margin-bottom:16px;">
+            <div style="font-weight:700; color:var(--color-gold); margin-bottom:8px; font-size:0.95rem;">🏦 Direct Bank Account Transfer</div>
+            <div style="font-size:0.85rem; color:var(--color-cream); line-height:1.6;">
+              <strong>Bank Name:</strong> HDFC Bank Ltd.<br>
+              <strong>Account Holder:</strong> Raja Priya Group<br>
+              <strong>Account No:</strong> <span style="font-family:monospace; color:var(--color-cream);">50200012345678</span><br>
+              <strong>IFSC Code:</strong> <span style="font-family:monospace; color:var(--color-cream);">HDFC0001234</span><br>
+              <strong>Branch:</strong> Gachibowli, Hyderabad
+            </div>
+          </div>
+
+          <div style="padding:12px; background:rgba(40,167,69,0.1); border:1px solid rgba(40,167,69,0.25); border-radius:8px; font-size:0.82rem; color:#51cf66;">
+            ✅ After submitting payment, your booking status will update to <strong>Pending Confirmation</strong>. Our team will verify and confirm within 2 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOKINGS -->
+    <div class="dash-panel" id="panel-bookings">
+      <h2 class="dash-panel-title">My Bookings</h2>
+      <p class="dash-panel-sub">Track all your project bookings and their current status.</p>
+      <div class="section-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Booking ID</th>
+              <th>Project Name</th>
+              <th>Type</th>
+              <th>Total Amount</th>
+              <th>Amount Paid</th>
+              <th>Balance</th>
+              <th>Status</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="bookingsTableBody">
+            <tr><td colspan="8"><div class="empty-state"><div class="empty-icon">📦</div><p>No bookings yet. Our team will add your bookings here.</p></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PAYMENTS -->
+    <div class="dash-panel" id="panel-payments">
+      <h2 class="dash-panel-title">My Payments</h2>
+      <p class="dash-panel-sub">Overview of all your payment details and balances.</p>
+      <div id="paymentsContent"></div>
+    </div>
+
+    <!-- TRAINING -->
+    <div class="dash-panel" id="panel-training">
+      <h2 class="dash-panel-title">My Training</h2>
+      <p class="dash-panel-sub">Your enrolled training sessions and progress.</p>
+      <div id="trainingContent"></div>
+    </div>
+
+    <!-- ANNOUNCEMENTS -->
+    <div class="dash-panel" id="panel-announcements">
+      <h2 class="dash-panel-title">Announcements</h2>
+      <p class="dash-panel-sub">Latest news and updates from Raja Priya Group.</p>
+      <div class="section-card" id="allAnnouncements"></div>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div class="dash-panel" id="panel-notifications">
+      <h2 class="dash-panel-title">Notifications</h2>
+      <p class="dash-panel-sub">Your activity notifications and alerts.</p>
+      <div class="section-card" id="notificationsContent"></div>
+    </div>
+
+    <!-- CHAT -->
+    <div class="dash-panel" id="panel-chat">
+      <h2 class="dash-panel-title">Chat with Team</h2>
+      <p class="dash-panel-sub">Message the Raja Priya Group team directly.</p>
+      <div class="chat-container">
+        <div class="chat-messages" id="chatMessages">
+          <div class="empty-state"><div class="empty-icon">💬</div><p>Start a conversation with our team!</p></div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" id="chatInput" placeholder="Type your message..." autocomplete="off">
+          <button class="chat-send-btn" id="chatSendBtn">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="dash-panel" id="panel-profile">
+      <h2 class="dash-panel-title">My Profile</h2>
+      <p class="dash-panel-sub">Update your personal information and preferences.</p>
+      <div class="section-card" style="max-width:600px;">
+        <h3>Personal Details</h3>
+        <form class="profile-form" id="profileForm">
+          <div class="form-group"><label>Full Name</label><input type="text" id="pName"></div>
+          <div class="form-group"><label>Email Address</label><input type="email" id="pEmail" readonly style="opacity:0.6"></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" id="pPhone"></div>
+          <div class="form-group"><label>Profession</label><input type="text" id="pProfession"></div>
+          <div class="form-group"><label>City</label><input type="text" id="pCity"></div>
+          <div class="form-group"><label>Interest / Category</label><input type="text" id="pInterest" readonly style="opacity:0.6"></div>
+          <div class="form-group"><label>New Password (leave blank to keep current)</label><input type="password" id="pPassword" placeholder="••••••••"></div>
+          <button type="submit" class="profile-save-btn">Save Changes</button>
+          <p id="profileMsg" style="color:#51cf66;font-size:0.85rem;margin-top:4px;display:none">✅ Profile updated successfully!</p>
+        </form>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

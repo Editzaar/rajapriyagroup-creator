@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner Control Panel — Raja Priya Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- PIN GATE -->
+<div class="pin-gate" id="ownerGate">
+  <div class="pin-gate-card">
+    <div class="pin-gate-logo">👑 Owner Access</div>
+    <div class="pin-gate-sub">Raja Priya Group — Master Control Panel</div>
+    <input type="password" class="pin-gate-input" id="ownerPwInput" placeholder="Enter owner password" autocomplete="off">
+    <button class="pin-gate-btn" id="ownerPwBtn">Access Master Panel</button>
+    <div class="pin-gate-error" id="ownerPwError"></div>
+    <div style="margin-top:20px;display:flex;gap:12px;justify-content:center">
+      <a href="employee.html" style="color:var(--color-gray);font-size:.8rem">→ Employee Login</a>
+      <a href="index.html" style="color:var(--color-gray);font-size:.8rem">→ Back to Website</a>
+    </div>
+  </div>
+</div>
+
+<!-- OWNER LAYOUT -->
+<div class="admin-layout" id="ownerLayout" style="display:none">
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <div>
+        <span class="logo-mark">Raja Priya GROUP</span>
+        <span class="logo-sub">Owner Master Panel</span>
+      </div>
+    </div>
+    <div class="admin-role-badge owner">👑 Owner</div>
+
+    <div class="admin-nav-section">Overview</div>
+    <div class="admin-nav-item active" data-tab="overview"><span>📊</span> Dashboard</div>
+
+    <div class="admin-nav-section">Management</div>
+    <div class="admin-nav-item" data-tab="clients"><span>👥</span> Clients</div>
+    <div class="admin-nav-item" data-tab="employees"><span>🧑‍💼</span> Employees</div>
+    <div class="admin-nav-item" data-tab="bookings"><span>📦</span> Bookings</div>
+    <div class="admin-nav-item" data-tab="payments"><span>💰</span> Payments</div>
+    <div class="admin-nav-item" data-tab="projects"><span>🏗️</span> Projects CMS</div>
+    <div class="admin-nav-item" data-tab="training"><span>📚</span> Training</div>
+    <div class="admin-nav-item" data-tab="announcements"><span>📢</span> Announcements</div>
+
+    <div class="admin-nav-section">Monitoring</div>
+    <div class="admin-nav-item" data-tab="allchats"><span>💬</span> All Chats Monitor <span class="admin-nav-badge" id="ownerChatBadge" style="display:none">!</span></div>
+    <div class="admin-nav-item" data-tab="auditlog"><span>🔍</span> Activity Audit Log</div>
+
+    <div class="admin-nav-section">System</div>
+    <div class="admin-nav-item" data-tab="settings"><span>⚙️</span> Settings</div>
+
+    <div class="admin-logout-area">
+      <button class="admin-logout-btn" id="ownerLogoutBtn">🚪 Log Out</button>
+    </div>
+  </aside>
+
+  <main class="admin-content">
+
+    <!-- OVERVIEW -->
+    <div class="admin-panel active" id="owner-tab-overview">
+      <div class="admin-page-header"><div><h2>Master Dashboard</h2><p>Complete overview of Raja Priya Group operations.</p></div></div>
+      <div class="admin-stats-grid">
+        <div class="admin-stat-card"><div class="stat-icon">👥</div><div class="stat-val" id="ow-clients">0</div><div class="stat-lbl">Total Clients</div></div>
+        <div class="admin-stat-card"><div class="stat-icon">🧑‍💼</div><div class="stat-val" id="ow-employees">0</div><div class="stat-lbl">Employees</div></div>
+        <div class="admin-stat-card"><div class="stat-icon">📦</div><div class="stat-val" id="ow-bookings">0</div><div class="stat-lbl">Total Bookings</div></div>
+        <div class="admin-stat-card"><div class="stat-icon">✅</div><div class="stat-val" id="ow-completed">0</div><div class="stat-lbl">Completed</div></div>
+        <div class="admin-stat-card"><div class="stat-icon">💰</div><div class="stat-val" id="ow-revenue">₹0</div><div class="stat-lbl">Total Revenue</div></div>
+        <div class="admin-stat-card"><div class="stat-icon">⏳</div><div class="stat-val" id="ow-balance">₹0</div><div class="stat-lbl">Balance Due</div></div>
+        <div class="admin-stat-card"><div class="stat-icon">💬</div><div class="stat-val" id="ow-chats">0</div><div class="stat-lbl">Active Chats</div></div>
+        <div class="admin-stat-card"><div class="stat-icon">🏗️</div><div class="stat-val" id="ow-projects">0</div><div class="stat-lbl">Projects</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <div class="admin-table-wrap" style="padding:20px">
+          <h3 style="color:var(--color-cream);margin-bottom:14px;font-family:var(--font-display)">📋 Recent Audit Log</h3>
+          <div id="overviewAudit"></div>
+        </div>
+        <div class="admin-table-wrap" style="padding:20px">
+          <h3 style="color:var(--color-cream);margin-bottom:14px;font-family:var(--font-display)">📦 Recent Bookings</h3>
+          <div id="overviewBookings"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENTS -->
+    <div class="admin-panel" id="owner-tab-clients">
+      <div class="admin-page-header">
+        <div><h2>Client Manager</h2><p>Full control over all registered clients.</p></div>
+      </div>
+      <div class="admin-table-wrap">
+        <div class="admin-table-toolbar">
+          <h3>All Clients (<span id="clientCount">0</span>)</h3>
+          <input type="text" class="admin-search" id="ownerClientSearch" placeholder="🔍 Search...">
+        </div>
+        <table class="admin-table">
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Profession</th><th>City</th><th>Interest</th><th>Registered</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="ownerClientsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- EMPLOYEES -->
+    <div class="admin-panel" id="owner-tab-employees">
+      <div class="admin-page-header">
+        <div><h2>Employee Manager</h2><p>Add employees and control their access permissions.</p></div>
+        <button class="btn-admin-gold" id="ownerAddEmpBtn">+ Add Employee</button>
+      </div>
+      <div class="admin-table-wrap" style="margin-bottom:24px">
+        <div class="admin-table-toolbar"><h3>All Employees</h3></div>
+        <table class="admin-table">
+          <thead><tr><th>Name</th><th>Email</th><th>Department</th><th>PIN</th><th>Last Login</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="ownerEmployeesBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- BOOKINGS -->
+    <div class="admin-panel" id="owner-tab-bookings">
+      <div class="admin-page-header">
+        <div><h2>Booking Manager</h2><p>Full control over all client bookings.</p></div>
+        <button class="btn-admin-gold" id="ownerNewBookingBtn">+ New Booking</button>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead><tr><th>ID</th><th>Client</th><th>Project</th><th>Total</th><th>Paid</th><th>Balance</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+          <tbody id="ownerBookingsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PAYMENTS -->
+    <div class="admin-panel" id="owner-tab-payments">
+      <div class="admin-page-header"><div><h2>Payment Manager</h2><p>Update payment amounts for any booking.</p></div></div>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead><tr><th>ID</th><th>Client</th><th>Project</th><th>Total</th><th>Paid</th><th>Balance</th><th>Method & Ref</th><th>Update Paid</th><th>Status</th></tr></thead>
+          <tbody id="ownerPaymentsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="admin-panel" id="owner-tab-projects">
+      <div class="admin-page-header">
+        <div><h2>Projects CMS</h2><p>Manage all projects visible on the website.</p></div>
+        <button class="btn-admin-gold" id="ownerNewProjectBtn">+ Add Project</button>
+      </div>
+      <div id="ownerProjectList"></div>
+    </div>
+
+    <!-- TRAINING -->
+    <div class="admin-panel" id="owner-tab-training">
+      <div class="admin-page-header">
+        <div><h2>Training Manager</h2><p>Assign and manage client training sessions.</p></div>
+        <button class="btn-admin-gold" id="ownerNewTrainingBtn">+ Assign Training</button>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead><tr><th>Client</th><th>Title</th><th>Progress</th><th>Status</th><th>Update Progress</th><th>Date</th></tr></thead>
+          <tbody id="ownerTrainingBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ANNOUNCEMENTS -->
+    <div class="admin-panel" id="owner-tab-announcements">
+      <div class="admin-page-header">
+        <div><h2>Announcements</h2><p>Post and manage site-wide announcements.</p></div>
+        <button class="btn-admin-gold" id="ownerNewAnnBtn">+ New Announcement</button>
+      </div>
+      <div id="ownerAnnList"></div>
+    </div>
+
+    <!-- ALL CHATS MONITOR -->
+    <div class="admin-panel" id="owner-tab-allchats">
+      <div class="admin-page-header"><div><h2>All Chats Monitor</h2><p>View and participate in any client conversation.</p></div></div>
+      <div class="chat-split">
+        <div class="chat-client-list">
+          <div class="chat-client-list-header">All Conversations</div>
+          <div id="ownerChatList"></div>
+        </div>
+        <div class="chat-window">
+          <div class="chat-window-header" id="ownerChatHeader">Select a conversation</div>
+          <div class="chat-window-messages" id="ownerChatMessages"><div class="empty-state"><div class="empty-icon">💬</div><p>Select a conversation to view.</p></div></div>
+          <div class="chat-window-input" id="ownerChatInput" style="display:none">
+            <input type="text" id="ownerChatMsg" placeholder="Type a message as Owner...">
+            <button class="btn-admin-gold" id="ownerChatSendBtn">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUDIT LOG -->
+    <div class="admin-panel" id="owner-tab-auditlog">
+      <div class="admin-page-header">
+        <div><h2>Activity Audit Log</h2><p>Every employee action — timestamped and tracked.</p></div>
+      </div>
+      <div class="admin-table-wrap" style="padding:20px">
+        <div style="display:flex;gap:12px;margin-bottom:16px">
+          <input type="text" class="admin-search" id="auditSearch" placeholder="🔍 Search by employee or action...">
+        </div>
+        <div id="auditLogList"></div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="admin-panel" id="owner-tab-settings">
+      <div class="admin-page-header"><div><h2>Settings</h2><p>System configuration and security.</p></div></div>
+      <div class="admin-table-wrap" style="padding:28px;max-width:480px">
+        <h3 style="color:var(--color-cream);margin-bottom:20px;font-family:var(--font-display)">🔐 Change Owner Password</h3>
+        <div class="admin-form-group"><label>New Password</label><input type="password" id="newOwnerPw" placeholder="Enter new password"></div>
+        <div class="admin-form-group"><label>Confirm Password</label><input type="password" id="confirmOwnerPw" placeholder="Confirm password"></div>
+        <button class="btn-admin-gold" id="changeOwnerPwBtn" style="margin-top:8px">Save Password</button>
+        <p id="pwChangeMsg" style="margin-top:10px;font-size:.85rem;display:none"></p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODALS -->
+<!-- Add Employee -->
+<div class="admin-modal-backdrop" id="ownerAddEmpModal">
+  <div class="admin-modal-box">
+    <div class="admin-modal-title">Add New Employee</div>
+    <div class="admin-form-group"><label>Full Name</label><input type="text" id="empName" placeholder="Employee name"></div>
+    <div class="admin-form-group"><label>Email</label><input type="email" id="empEmail"></div>
+    <div class="admin-form-group"><label>Department</label><input type="text" id="empDept" placeholder="e.g. Sales, Construction, Marketing"></div>
+    <div class="admin-form-group"><label>Login PIN (min 4 chars)</label><input type="text" id="empPinNew" placeholder="e.g. emp1234" minlength="4"></div>
+    <div class="admin-modal-title" style="font-size:1rem;margin-top:16px;margin-bottom:10px">Permissions</div>
+    <div class="permission-grid" id="newEmpPermGrid">
+      <div class="permission-item"><span class="permission-label">👥 View Clients</span><label class="toggle-switch"><input type="checkbox" id="perm_view_clients"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">🔍 View Client Details</span><label class="toggle-switch"><input type="checkbox" id="perm_view_client_details"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">📦 Manage Bookings</span><label class="toggle-switch"><input type="checkbox" id="perm_manage_bookings"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">🏗️ Manage Projects</span><label class="toggle-switch"><input type="checkbox" id="perm_manage_projects"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">💬 Chat with Clients</span><label class="toggle-switch"><input type="checkbox" id="perm_chat_with_clients"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">📢 Post Announcements</span><label class="toggle-switch"><input type="checkbox" id="perm_post_announcements"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">💰 View Payments</span><label class="toggle-switch"><input type="checkbox" id="perm_view_payments"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">📊 View Reports</span><label class="toggle-switch"><input type="checkbox" id="perm_view_reports"><span class="toggle-slider"></span></label></div>
+    </div>
+    <div class="admin-modal-actions">
+      <button class="btn-modal-cancel" onclick="closeOwnerModal('ownerAddEmpModal')">Cancel</button>
+      <button class="btn-admin-gold" id="ownerSaveEmpBtn">Add Employee</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Employee Permissions -->
+<div class="admin-modal-backdrop" id="ownerEditEmpModal">
+  <div class="admin-modal-box">
+    <div class="admin-modal-title">Edit Employee: <span id="editEmpName"></span></div>
+    <input type="hidden" id="editEmpId">
+    <div class="permission-grid">
+      <div class="permission-item"><span class="permission-label">👥 View Clients</span><label class="toggle-switch"><input type="checkbox" id="eperm_view_clients"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">🔍 View Client Details</span><label class="toggle-switch"><input type="checkbox" id="eperm_view_client_details"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">📦 Manage Bookings</span><label class="toggle-switch"><input type="checkbox" id="eperm_manage_bookings"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">🏗️ Manage Projects</span><label class="toggle-switch"><input type="checkbox" id="eperm_manage_projects"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">💬 Chat with Clients</span><label class="toggle-switch"><input type="checkbox" id="eperm_chat_with_clients"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">📢 Post Announcements</span><label class="toggle-switch"><input type="checkbox" id="eperm_post_announcements"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">💰 View Payments</span><label class="toggle-switch"><input type="checkbox" id="eperm_view_payments"><span class="toggle-slider"></span></label></div>
+      <div class="permission-item"><span class="permission-label">📊 View Reports</span><label class="toggle-switch"><input type="checkbox" id="eperm_view_reports"><span class="toggle-slider"></span></label></div>
+    </div>
+    <div class="admin-modal-actions">
+      <button class="btn-modal-cancel" onclick="closeOwnerModal('ownerEditEmpModal')">Cancel</button>
+      <button class="btn-admin-gold" id="ownerUpdateEmpPermBtn">Save Permissions</button>
+    </div>
+  </div>
+</div>
+
+<!-- New Booking -->
+<div class="admin-modal-backdrop" id="ownerBookingModal">
+  <div class="admin-modal-box">
+    <div class="admin-modal-title">Create Booking</div>
+    <div class="admin-form-group"><label>Client</label><select id="ownerMbClient"></select></div>
+    <div class="admin-form-group"><label>Project Name</label><input type="text" id="ownerMbProject"></div>
+    <div class="admin-form-group"><label>Type</label><select id="ownerMbType"><option>Real Estate</option><option>Construction</option><option>Brand Promotion</option><option>Social Media</option><option>Training</option></select></div>
+    <div class="admin-form-group"><label>Total Amount (₹)</label><input type="number" id="ownerMbTotal"></div>
+    <div class="admin-form-group"><label>Amount Paid (₹)</label><input type="number" id="ownerMbPaid" value="0"></div>
+    <div class="admin-form-group"><label>Notes</label><textarea id="ownerMbNotes"></textarea></div>
+    <div class="admin-modal-actions">
+      <button class="btn-modal-cancel" onclick="closeOwnerModal('ownerBookingModal')">Cancel</button>
+      <button class="btn-admin-gold" id="ownerSaveBookingBtn">Create Booking</button>
+    </div>
+  </div>
+</div>
+
+<!-- New Announcement -->
+<div class="admin-modal-backdrop" id="ownerAnnModal">
+  <div class="admin-modal-box">
+    <div class="admin-modal-title">New Announcement</div>
+    <div class="admin-form-group"><label>Title</label><input type="text" id="ownerAnnTitle"></div>
+    <div class="admin-form-group"><label>Body</label><textarea id="ownerAnnBody"></textarea></div>
+    <div class="admin-modal-actions">
+      <button class="btn-modal-cancel" onclick="closeOwnerModal('ownerAnnModal')">Cancel</button>
+      <button class="btn-admin-gold" id="ownerSaveAnnBtn">Post</button>
+    </div>
+  </div>
+</div>
+
+<!-- New Project -->
+<div class="admin-modal-backdrop" id="ownerProjectModal">
+  <div class="admin-modal-box">
+    <div class="admin-modal-title">Project</div>
+    <input type="hidden" id="ownerPrjId">
+    <div class="admin-form-group"><label>Title</label><input type="text" id="ownerPrjTitle"></div>
+    <div class="admin-form-group"><label>Category</label><select id="ownerPrjCat"><option>Plots</option><option>Villa</option><option>Commercial</option><option>Construction</option></select></div>
+    <div class="admin-form-group"><label>Location</label><input type="text" id="ownerPrjLoc"></div>
+    <div class="admin-form-group"><label>Price</label><input type="text" id="ownerPrjPrice"></div>
+    <div class="admin-form-group"><label>Status</label><select id="ownerPrjStatus"><option>Available</option><option>Sold Out</option><option>Coming Soon</option></select></div>
+    <div class="admin-form-group"><label>Description</label><textarea id="ownerPrjDesc"></textarea></div>
+    <div class="admin-modal-actions">
+      <button class="btn-modal-cancel" onclick="closeOwnerModal('ownerProjectModal')">Cancel</button>
+      <button class="btn-admin-gold" id="ownerSaveProjectBtn">Save Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- Assign Training -->
+<div class="admin-modal-backdrop" id="ownerTrainingModal">
+  <div class="admin-modal-box">
+    <div class="admin-modal-title">Assign Training Session</div>
+    <div class="admin-form-group"><label>Client</label><select id="ownerTrClient"></select></div>
+    <div class="admin-form-group"><label>Training Title</label><input type="text" id="ownerTrTitle" placeholder="e.g. Real Estate Investment Basics"></div>
+    <div class="admin-form-group"><label>Description</label><textarea id="ownerTrDesc"></textarea></div>
+    <div class="admin-modal-actions">
+      <button class="btn-modal-cancel" onclick="closeOwnerModal('ownerTrainingModal')">Cancel</button>
+      <button class="btn-admin-gold" id="ownerSaveTrainingBtn">Assign</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="js/data.js"></script>
+<script src="js/owner.js"></script>
+</body>
+</html>
