@@ -187,11 +187,11 @@
   // Auto Initialize Default Data so dashboard is never blank
   (function initDefaultData() {
     try {
+      // 1. Employees
       const employees = read(KEYS.EMPLOYEES);
       const vishalEmail = 'vishal.mayur@dreamsanddegrees.com';
-      let empList = employees;
-      if (!empList.some(e => (e.email || '').toLowerCase() === vishalEmail)) {
-        empList.push({
+      if (!employees.some(e => (e.email || '').toLowerCase() === vishalEmail)) {
+        employees.push({
           id: 'emp_vishal',
           name: 'Vishal Mayur',
           email: vishalEmail,
@@ -207,37 +207,41 @@
             view_payments: true, view_reports: true
           }
         });
-        write(KEYS.EMPLOYEES, empList);
+        write(KEYS.EMPLOYEES, employees);
       }
 
+      // 2. Users / Clients
       const users = read(KEYS.USERS);
       if (users.length === 0) {
         const c1 = { id: 'usr_bickram', name: 'Bickram Nath', email: 'bickram@demo.com', phone: '+91 9876543210', profession: 'Business Brand', city: 'Hyderabad', interest: 'Business Brand', password: 'demo123', registeredAt: ts(), status: 'active' };
         const c2 = { id: 'usr_rahul', name: 'Rahul Sharma', email: 'rahul@demo.com', phone: '+91 9123456780', profession: 'Software Engineer', city: 'Secunderabad', interest: 'Real Estate / Plot Buyer', password: 'demo123', registeredAt: ts(), status: 'active' };
         write(KEYS.USERS, [c1, c2]);
+      }
 
-        const bookings = read(KEYS.BOOKINGS);
-        if (bookings.length === 0) {
-          write(KEYS.BOOKINGS, [
-            { id: 'BK116560', clientId: c1.id, projectName: 'Brand Promotion & Marketing Campaign', type: 'Real Estate', totalAmount: 5000, paidAmount: 500, status: 'Pending', notes: 'Initial booking request', createdAt: ts() },
-            { id: 'BK116561', clientId: c2.id, projectName: 'Green Valley Plot #42', type: 'Real Estate', totalAmount: 1500000, paidAmount: 750000, status: 'In Progress', notes: 'Plot booking', createdAt: ts() }
-          ]);
-        }
+      // 3. Bookings
+      const bookings = read(KEYS.BOOKINGS);
+      if (bookings.length === 0) {
+        write(KEYS.BOOKINGS, [
+          { id: 'BK116560', clientId: 'usr_bickram', projectName: 'Brand Promotion & Marketing Campaign', type: 'Real Estate', totalAmount: 5000, paidAmount: 500, status: 'Pending', notes: 'Initial booking request', createdAt: ts() },
+          { id: 'BK116561', clientId: 'usr_rahul', projectName: 'Green Valley Plot #42', type: 'Real Estate', totalAmount: 1500000, paidAmount: 750000, status: 'In Progress', notes: 'Plot booking', createdAt: ts() }
+        ]);
+      }
 
-        const anns = read(KEYS.ANNOUNCEMENTS);
-        if (anns.length === 0) {
-          write(KEYS.ANNOUNCEMENTS, [
-            { id: 'ann_1', title: '🎉 New Project Launch: Green Valley Phase 3', body: 'We are excited to announce the launch of Green Valley Phase 3 in Bachupally. Plots starting from ₹18 Lakhs.', postedBy: 'Raja Priya Group Team', createdAt: ts() }
-          ]);
-        }
+      // 4. Announcements
+      const anns = read(KEYS.ANNOUNCEMENTS);
+      if (anns.length === 0) {
+        write(KEYS.ANNOUNCEMENTS, [
+          { id: 'ann_1', title: '🎉 New Project Launch: Green Valley Phase 3', body: 'We are excited to announce the launch of Green Valley Phase 3 in Bachupally. Plots starting from ₹18 Lakhs.', postedBy: 'Raja Priya Group Team', createdAt: ts() }
+        ]);
+      }
 
-        const prjs = read(KEYS.PROJECTS);
-        if (prjs.length === 0) {
-          write(KEYS.PROJECTS, [
-            { id: 'prj_1', title: 'Green Valley Plots — Phase 2', category: 'Plots', location: 'Bachupally, Hyderabad', price: '₹18 Lakhs onwards', status: 'Available', description: 'Premium gated community plots with all amenities. HMDA approved.' },
-            { id: 'prj_2', title: 'Sunrise Residency', category: 'Villa', location: 'Kondapur, Hyderabad', price: '₹75 Lakhs onwards', status: 'Available', description: 'Luxury 3BHK & 4BHK villas with clubhouse and security.' }
-          ]);
-        }
+      // 5. Projects
+      const prjs = read(KEYS.PROJECTS);
+      if (prjs.length === 0) {
+        write(KEYS.PROJECTS, [
+          { id: 'prj_1', title: 'Green Valley Plots — Phase 2', category: 'Plots', location: 'Bachupally, Hyderabad', price: '₹18 Lakhs onwards', status: 'Available', description: 'Premium gated community plots with all amenities. HMDA approved.' },
+          { id: 'prj_2', title: 'Sunrise Residency', category: 'Villa', location: 'Kondapur, Hyderabad', price: '₹75 Lakhs onwards', status: 'Available', description: 'Luxury 3BHK & 4BHK villas with clubhouse and security.' }
+        ]);
       }
     } catch (e) {
       console.error('Auto init error:', e);
