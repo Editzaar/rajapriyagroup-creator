@@ -471,6 +471,12 @@
     if (!el) return;
     const users = RPG.Users.all();
     if (!users.length) { el.innerHTML='<p style="padding:16px;color:var(--color-gray);font-size:.85rem">No clients yet.</p>'; return; }
+    
+    // Auto-select first client if none selected
+    if (!activeChatId && users.length > 0) {
+      activeChatId = users[0].id;
+    }
+
     el.innerHTML = users.map(u=>{
       const thread = RPG.Chat.getThread(u.id);
       const last = thread[thread.length-1];
@@ -484,13 +490,18 @@
         ${unread>0?'<div class="chat-unread-dot"></div>':''}
       </div>`;
     }).join('');
+
+    if (activeChatId) {
+      renderOwnerChatMessages();
+    }
   }
 
   window.ownerSelectChat = function(clientId) {
     activeChatId = clientId;
     const user = RPG.Users.findById(clientId);
     document.getElementById('ownerChatHeader').textContent = '💬 ' + (user?user.name:'Client') + ' — Full Chat History';
-    document.getElementById('ownerChatInput').style.display = 'flex';
+    const inputArea = document.getElementById('ownerChatInput');
+    if (inputArea) inputArea.style.display = 'flex';
     RPG.Chat.markRead(clientId,'owner');
     renderOwnerChatMessages();
     renderOwnerChatList();
@@ -503,10 +514,12 @@
 
   function renderOwnerChatMessages() {
     if (!activeChatId) return;
+    const inputArea = document.getElementById('ownerChatInput');
+    if (inputArea) inputArea.style.display = 'flex';
     const thread = RPG.Chat.getThread(activeChatId);
     const el = document.getElementById('ownerChatMessages');
     if (!el) return;
-    if (!thread.length) { el.innerHTML='<div class="empty-state"><div class="empty-icon">💬</div><p>No messages in this conversation.</p></div>'; return; }
+    if (!thread.length) { el.innerHTML='<div class="empty-state"><div class="empty-icon">💬</div><p>No messages in this conversation yet. Send a message below!</p></div>'; return; }
     el.innerHTML = thread.map(m=>{
       const isOwner = m.senderRole==='owner';
       return `<div>

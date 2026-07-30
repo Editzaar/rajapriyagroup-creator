@@ -313,11 +313,13 @@
 
   function renderChatMessages() {
     if (!activeChatClientId) return;
+    const inputArea = document.getElementById('empChatInputArea');
+    if (inputArea) inputArea.style.display = 'flex';
     const thread = RPG.Chat.getThread(activeChatClientId);
     RPG.Chat.markRead(activeChatClientId, 'employee');
     const el = document.getElementById('empChatMessages');
     if (!el) return;
-    if (!thread.length) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">💬</div><p>No messages yet.</p></div>'; return; }
+    if (!thread.length) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">💬</div><p>No messages yet. Send a message below!</p></div>'; return; }
     el.innerHTML = thread.map(m => {
       const isMine = m.senderRole === 'employee';
       return `<div>
