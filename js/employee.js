@@ -100,6 +100,20 @@
       else if (tabId === 'projects') renderProjects();
       else if (tabId === 'announcements') renderAnnouncements();
     }, 2000);
+
+    // Instant real-time update when data changes in any tab/window
+    window.addEventListener('rpg_data_changed', function () {
+      updateChatBadge();
+      const activePanel = document.querySelector('.admin-panel.active');
+      if (!activePanel) return;
+      const tabId = activePanel.id.replace('emp-tab-', '');
+      if (tabId === 'dashboard') loadStats();
+      else if (tabId === 'clients') renderClients(document.getElementById('empClientSearch')?.value);
+      else if (tabId === 'bookings') renderBookings();
+      else if (tabId === 'payments') renderPayments();
+      else if (tabId === 'projects') renderProjects();
+      else if (tabId === 'announcements') renderAnnouncements();
+    });
   }
 
   function switchTab(tab) {

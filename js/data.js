@@ -22,6 +22,8 @@
     CURRENT_OWNER: 'rpg_current_owner'
   };
 
+  const syncChannel = (typeof BroadcastChannel !== 'undefined') ? new BroadcastChannel('rpg_data_sync') : null;
+
   function read(key) {
     try { return JSON.parse(localStorage.getItem(key)) || []; } catch (e) { return []; }
   }
@@ -30,6 +32,9 @@
   }
   function write(key, val) {
     localStorage.setItem(key, JSON.stringify(val));
+    if (syncChannel) {
+      try { syncChannel.postMessage({ key, timestamp: Date.now() }); } catch(e){}
+    }
   }
   function uid() {
     return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
@@ -37,6 +42,16 @@
   function ts() {
     return new Date().toLocaleString('en-IN', { hour12: true });
   }
+
+  // Cross-tab real-time event listener
+  if (syncChannel) {
+    syncChannel.onmessage = function (e) {
+      window.dispatchEvent(new CustomEvent('rpg_data_changed', { detail: e.data }));
+    };
+  }
+  window.addEventListener('storage', function (e) {
+    window.dispatchEvent(new CustomEvent('rpg_data_changed', { detail: { key: e.key } }));
+  });
 
   // 7 Days Session Expiry (7 days * 24 hrs * 60 mins * 60 secs * 1000 ms)
   const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
@@ -56,6 +71,7 @@
       const users = Users.all();
       users.push(user);
       write(KEYS.USERS, users);
+      AuditLog.add('system', 'Website', 'New Registration', `New client registered: ${user.name} (${user.email})`);
       return user;
     },
     block: (id) => {
@@ -266,7 +282,9 @@
       const list = Bookings.all();
       list.push(b);
       write(KEYS.BOOKINGS, list);
-      Notifications.add(data.clientId, `New booking "${data.projectName}" created.`);
+      const user = Users.findById(data.clientId);
+      AuditLog.add('system', 'Client Self-Service', 'New Booking Created', `New booking ${b.id} ("${b.projectName}") submitted by ${user ? user.name : 'Client'}`);
+      Notifications.add(data.clientId, `New booking "${data.projectName}" created (ID: ${b.id}).`);
       return b;
     },
     update: (id, patch) => {

@@ -86,6 +86,25 @@
       populateClientDropdown('ownerMbClient');
       populateClientDropdown('ownerTrClient');
     }, 2000);
+
+    // Instant real-time update when data changes in any tab/window
+    window.addEventListener('rpg_data_changed', function () {
+      const activePanel = document.querySelector('.admin-panel.active');
+      if (!activePanel) return;
+      const tabId = activePanel.id.replace('owner-tab-', '');
+      if (tabId === 'overview') loadOverview();
+      else if (tabId === 'clients') renderClients(document.getElementById('ownerClientSearch')?.value);
+      else if (tabId === 'employees') renderEmployees();
+      else if (tabId === 'bookings') renderBookings();
+      else if (tabId === 'payments') renderPayments();
+      else if (tabId === 'projects') renderProjects();
+      else if (tabId === 'training') renderTraining();
+      else if (tabId === 'announcements') renderAnnouncements();
+      else if (tabId === 'auditlog') renderAuditLog(document.getElementById('auditSearch')?.value);
+
+      populateClientDropdown('ownerMbClient');
+      populateClientDropdown('ownerTrClient');
+    });
   }
 
   function switchTab(tab) {
