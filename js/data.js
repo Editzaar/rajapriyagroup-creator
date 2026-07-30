@@ -81,12 +81,16 @@
           localStorage.removeItem(KEYS.CURRENT_USER);
           return null;
         }
-        return data.user || data;
+        let user = data.user || data;
+        while (user && user.user) { user = user.user; }
+        return (user && user.id) ? user : null;
       } catch (e) { return null; }
     },
     setClient: (u) => {
       if (u) {
-        localStorage.setItem(KEYS.CURRENT_USER, JSON.stringify({ user: u, _sessionTime: Date.now() }));
+        let cleanUser = u.user || u;
+        while (cleanUser && cleanUser.user) { cleanUser = cleanUser.user; }
+        localStorage.setItem(KEYS.CURRENT_USER, JSON.stringify({ user: cleanUser, _sessionTime: Date.now() }));
       } else {
         localStorage.removeItem(KEYS.CURRENT_USER);
       }
@@ -102,12 +106,16 @@
           localStorage.removeItem(KEYS.CURRENT_EMPLOYEE);
           return null;
         }
-        return data.employee || data;
+        let emp = data.employee || data;
+        while (emp && emp.employee) { emp = emp.employee; }
+        return (emp && emp.id) ? emp : null;
       } catch (e) { return null; }
     },
     setEmployee: (e) => {
       if (e) {
-        localStorage.setItem(KEYS.CURRENT_EMPLOYEE, JSON.stringify({ employee: e, _sessionTime: Date.now() }));
+        let cleanEmp = e.employee || e;
+        while (cleanEmp && cleanEmp.employee) { cleanEmp = cleanEmp.employee; }
+        localStorage.setItem(KEYS.CURRENT_EMPLOYEE, JSON.stringify({ employee: cleanEmp, _sessionTime: Date.now() }));
       } else {
         localStorage.removeItem(KEYS.CURRENT_EMPLOYEE);
       }
