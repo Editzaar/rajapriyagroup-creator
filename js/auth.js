@@ -149,6 +149,11 @@
       interest: document.getElementById('regRole').value,
       password: document.getElementById('regPassword').value
     });
+
+    // Auto-create welcome notification & welcome chat message for new registration
+    RPG.Notifications.add(user.id, 'Welcome to Raja Priya Group! Explore our services or book your first project from your dashboard.');
+    RPG.Chat.sendMessage(user.id, 'team_welcome', 'Raja Priya Group Team', 'owner', `Welcome to Raja Priya Group, ${user.name}! 👋 How can we assist you today? Feel free to ask any questions or request a booking.`);
+
     showAlert('Account created! Taking you to your dashboard...', 'success');
     RPG.Session.setClient(user);
     setTimeout(() => {
