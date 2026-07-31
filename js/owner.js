@@ -229,6 +229,7 @@
         ${e.status==='active'
           ? `<button class="admin-action-btn danger" onclick="ownerDeactivateEmp('${e.id}')">Deactivate</button>`
           : `<button class="admin-action-btn success" onclick="ownerActivateEmp('${e.id}')">Activate</button>`}
+        <button class="admin-action-btn danger" style="background:#ff3b30;color:#fff" onclick="ownerDeleteEmp('${e.id}')">Delete</button>
       </td>
     </tr>`).join('');
   }
@@ -277,6 +278,7 @@
 
   window.ownerDeactivateEmp = function(id) { if(confirm('Deactivate this employee?')) { RPG.Employees.deactivate(id); renderEmployees(); toast('Employee deactivated.'); } };
   window.ownerActivateEmp   = function(id) { RPG.Employees.activate(id); renderEmployees(); toast('Employee activated.', 'success'); };
+  window.ownerDeleteEmp     = function(id) { if(confirm('Are you sure you want to permanently delete this employee? This cannot be undone.')) { RPG.Employees.delete(id); renderEmployees(); toast('Employee deleted permanently.', 'error'); } };
 
   /* ---- Bookings ---- */
   function renderBookings() {

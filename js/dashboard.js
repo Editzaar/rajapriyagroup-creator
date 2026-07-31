@@ -308,6 +308,176 @@
   function setupBookService() {
     const form = document.getElementById('clientBookForm');
     if (!form) return;
+    
+    // Add real-time Payment Method toggling
+    const payMethodSelect = document.getElementById('bookPayMethod');
+    if (payMethodSelect) {
+      payMethodSelect.addEventListener('change', togglePaymentPanels);
+    }
+    
+    // Add QR Code dynamic updating
+    const advanceInput = document.getElementById('bookAdvance');
+    const projectNameInput = document.getElementById('bookProjectName');
+    if (advanceInput && projectNameInput) {
+      advanceInput.addEventListener('input', updateUpiQrCode);
+      projectNameInput.addEventListener('input', updateUpiQrCode);
+    }
+    
+    // Toggle active payment method panels
+    function togglePaymentPanels() {
+      const val = payMethodSelect.value;
+      const upiPanel = document.getElementById('upiPaymentPanel');
+      const cardPanel = document.getElementById('cardPaymentPanel');
+      const bankPanel = document.getElementById('bankPaymentPanel');
+      
+      if (upiPanel) upiPanel.style.display = val.includes('UPI') ? 'block' : 'none';
+      if (cardPanel) cardPanel.style.display = val.includes('Card') ? 'block' : 'none';
+      if (bankPanel) bankPanel.style.display = val.includes('Bank') ? 'block' : 'none';
+    }
+    
+    // Update live UPI QR code based on inputs
+    function updateUpiQrCode() {
+      const amount = advanceInput.value || '5000';
+      const projName = projectNameInput.value.trim() || 'Booking Advance';
+      
+      const upiAmtLabel = document.getElementById('upiQrAmountLabel');
+      if (upiAmtLabel) upiAmtLabel.textContent = '₹' + amount;
+      
+      const qrImg = document.getElementById('upiDynamicQr');
+      const intentUrl = `upi://pay?pa=rajapriyagroup@upi&pn=Raja%20Priya%20Group&am=${amount}&cu=INR&tn=${encodeURIComponent(projName)}`;
+      if (qrImg) {
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(intentUrl)}`;
+      }
+      
+      const upiLink = document.getElementById('upiIntentLink');
+      if (upiLink) upiLink.href = intentUrl;
+    }
+
+    // Exposed Payment Gateway simulation handlers
+    window.openCardPaymentGate = function() {
+      const amount = advanceInput.value || '5000';
+      const gateAmt = document.getElementById('payGateAmount');
+      if (gateAmt) gateAmt.textContent = '₹' + amount;
+      
+      // Reset forms
+      const payStepForm = document.getElementById('payStepForm');
+      const payStepProcessing = document.getElementById('payStepProcessing');
+      const payStepOtp = document.getElementById('payStepOtp');
+      const payStepSuccess = document.getElementById('payStepSuccess');
+      
+      if (payStepForm) payStepForm.style.display = 'block';
+      if (payStepProcessing) payStepProcessing.style.display = 'none';
+      if (payStepOtp) payStepOtp.style.display = 'none';
+      if (payStepSuccess) payStepSuccess.style.display = 'none';
+      
+      const overlay = document.getElementById('payGatewayOverlay');
+      if (overlay) overlay.style.display = 'flex';
+    };
+
+    window.closePayGateway = function(success = false) {
+      const overlay = document.getElementById('payGatewayOverlay');
+      if (overlay) overlay.style.display = 'none';
+      
+      // If payment completed successfully, scroll to submit button
+      if (success) {
+        const txnInput = document.getElementById('bookTxnId');
+        if (txnInput) {
+          txnInput.scrollIntoView({ behavior: 'smooth' });
+          txnInput.style.border = '2px solid #51cf66';
+          setTimeout(() => { txnInput.style.border = ''; }, 3000);
+        }
+      }
+    };
+
+    window.handlePaySimulate = function(e) {
+      e.preventDefault();
+      
+      // Step 2: Show processing loader
+      document.getElementById('payStepForm').style.display = 'none';
+      const procPanel = document.getElementById('payStepProcessing');
+      procPanel.style.display = 'block';
+      
+      const procText = document.getElementById('payProcessingText');
+      procText.textContent = 'Contacting card issuer...';
+      
+      setTimeout(() => {
+        procText.textContent = 'Securing 3D Secure checkout...';
+        setTimeout(() => {
+          // Step 3: Show OTP window
+          procPanel.style.display = 'none';
+          document.getElementById('payStepOtp').style.display = 'block';
+        }, 1500);
+      }, 1500);
+    };
+
+    window.handleOtpSubmit = function(e) {
+      e.preventDefault();
+      const otpVal = document.getElementById('gateCardOtp').value.trim();
+      if (otpVal !== '123456') {
+        const err = document.getElementById('payOtpError');
+        if (err) err.style.display = 'block';
+        return;
+      }
+      
+      // Step 4: Verification spinner and success
+      document.getElementById('payStepOtp').style.display = 'none';
+      const procPanel = document.getElementById('payStepProcessing');
+      procPanel.style.display = 'block';
+      
+      const procText = document.getElementById('payProcessingText');
+      procText.textContent = 'Authorizing payment...';
+      
+      setTimeout(() => {
+        const txnId = 'TXN' + Math.floor(Math.random() * 90000000 + 10000000);
+        document.getElementById('gateTxnIdVal').textContent = txnId;
+        
+        const txnInput = document.getElementById('bookTxnId');
+        if (txnInput) txnInput.value = txnId;
+        
+        procPanel.style.display = 'none';
+        document.getElementById('payStepSuccess').style.display = 'block';
+      }, 2000);
+    };
+
+    // Format Card inputs
+    const cardInput = document.getElementById('gateCardNumber');
+    if (cardInput) {
+      cardInput.addEventListener('input', (e) => {
+        let v = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        let matches = v.match(/\d{4,16}/g);
+        let match = (matches && matches[0]) || '';
+        let parts = [];
+        for (let i=0, len=match.length; i<len; i+=4) {
+          parts.push(match.substring(i, i+4));
+        }
+        if (parts.length > 0) {
+          e.target.value = parts.join(' ');
+        } else {
+          e.target.value = v;
+        }
+        
+        // Brand icon update
+        const brandIcon = document.getElementById('gateCardBrandIcon');
+        if (brandIcon) {
+          if (v.startsWith('4')) brandIcon.textContent = 'Visa';
+          else if (v.startsWith('5')) brandIcon.textContent = 'Master';
+          else brandIcon.textContent = '💳';
+        }
+      });
+    }
+
+    const expiryInput = document.getElementById('gateCardExpiry');
+    if (expiryInput) {
+      expiryInput.addEventListener('input', (e) => {
+        let v = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        if (v.length >= 2) {
+          e.target.value = v.substring(0,2) + '/' + v.substring(2,4);
+        } else {
+          e.target.value = v;
+        }
+      });
+    }
+
     form.addEventListener('submit', e => {
       e.preventDefault();
       const type = document.getElementById('bookServiceType').value;
@@ -345,6 +515,7 @@
         setTimeout(() => msg.style.display = 'none', 4000);
       }
       form.reset();
+      updateUpiQrCode();
       loadOverview();
       updateBadges();
     });

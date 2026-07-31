@@ -282,6 +282,13 @@
         const list = Employees.all().map(e => e.id === id ? { ...e, status: 'active' } : e);
         localStorage.setItem(KEYS.EMPLOYEES, JSON.stringify(list));
       }
+    },
+    delete: (id) => {
+      if (global.db) {
+        global.db.collection('employees').doc(id).delete();
+      } else {
+        localStorage.setItem(KEYS.EMPLOYEES, JSON.stringify(Employees.all().filter(e => e.id !== id)));
+      }
     }
   };
 
