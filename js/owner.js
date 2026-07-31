@@ -471,9 +471,30 @@
   function renderOwnerChatList() {
     const el = document.getElementById('ownerChatList');
     if (!el) return;
-    const users = RPG.Users.all();
+    const users = [...RPG.Users.all()];
     if (!users.length) { el.innerHTML='<p style="padding:16px;color:var(--color-gray);font-size:.85rem">No clients yet.</p>'; return; }
     
+    // Sort chat list dynamically:
+    // 1. Unread chat threads first
+    // 2. Otherwise, threads with the most recent messages
+    // 3. Otherwise, sort by registration time (timestamp)
+    users.sort((a, b) => {
+      const unreadA = RPG.Chat.unreadCount(a.id, 'owner') > 0 ? 1 : 0;
+      const unreadB = RPG.Chat.unreadCount(b.id, 'owner') > 0 ? 1 : 0;
+      if (unreadA !== unreadB) return unreadB - unreadA;
+
+      const threadA = RPG.Chat.getThread(a.id);
+      const threadB = RPG.Chat.getThread(b.id);
+      const lastA = threadA[threadA.length - 1];
+      const lastB = threadB[threadB.length - 1];
+
+      const timeA = lastA ? (lastA.timestamp || 0) : 0;
+      const timeB = lastB ? (lastB.timestamp || 0) : 0;
+      if (timeA !== timeB) return timeB - timeA;
+
+      return (b.timestamp || 0) - (a.timestamp || 0);
+    });
+
     // Auto-select first client if none selected
     if (!activeChatId && users.length > 0) {
       activeChatId = users[0].id;

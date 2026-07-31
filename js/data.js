@@ -41,7 +41,7 @@
   // ---- FIREBASE SNAPSHOT LISTENERS FOR REAL-TIME CLOUD SYNC ----
   if (global.db) {
     const collectionsToSync = [
-      { coll: 'users', key: KEYS.USERS },
+      { coll: 'users', key: KEYS.USERS, sort: (a, b) => (b.timestamp || 0) - (a.timestamp || 0) },
       { coll: 'employees', key: KEYS.EMPLOYEES },
       { coll: 'bookings', key: KEYS.BOOKINGS, sort: (a, b) => (b.timestamp || 0) - (a.timestamp || 0) },
       { coll: 'training', key: KEYS.TRAINING },
@@ -99,7 +99,7 @@
       }
     },
     create: (data) => {
-      const user = { id: uid(), registeredAt: ts(), status: 'active', ...data };
+      const user = { id: uid(), registeredAt: ts(), timestamp: Date.now(), status: 'active', ...data };
       if (global.db) {
         global.db.collection('users').doc(user.id).set(user);
       } else {
@@ -396,7 +396,7 @@
     },
     sendMessage: (clientId, senderId, senderName, senderRole, text) => {
       const thread = Chat.getThread(clientId);
-      const msg = { id: uid(), senderId, senderName, senderRole, text, time: ts(), read: false };
+      const msg = { id: uid(), senderId, senderName, senderRole, text, time: ts(), timestamp: Date.now(), read: false };
       thread.push(msg);
       if (global.db) {
         global.db.collection('chats').doc(clientId).set({ messages: thread });
