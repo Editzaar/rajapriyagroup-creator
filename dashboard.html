@@ -26,7 +26,13 @@
       <img src="images/logo.png" alt="Raja Priya Group" onerror="this.style.display='none'">
       <span class="nav-brand-text">Raja Priya<span>GROUP</span></span>
     </a>
-    <div class="nav-cta" style="margin-left:auto;"></div>
+    <div class="nav-cta" style="margin-left:auto; display:flex; align-items:center;">
+      <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle Navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -132,7 +138,7 @@
       <h2 class="dash-panel-title">Book a Service & Online Payment</h2>
       <p class="dash-panel-sub">Select a service or project, choose your payment mode, and submit your booking.</p>
       
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div class="dash-grid-2">
         <div class="section-card">
           <h3>Request New Booking</h3>
           <form id="clientBookForm" class="profile-form" style="max-width:100%;">
@@ -241,24 +247,26 @@
     <div class="dash-panel" id="panel-bookings">
       <h2 class="dash-panel-title">My Bookings</h2>
       <p class="dash-panel-sub">Track all your project bookings and their current status.</p>
-      <div class="section-card">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Booking ID</th>
-              <th>Project Name</th>
-              <th>Type</th>
-              <th>Total Amount</th>
-              <th>Amount Paid</th>
-              <th>Balance</th>
-              <th>Status</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody id="bookingsTableBody">
-            <tr><td colspan="8"><div class="empty-state"><div class="empty-icon">📦</div><p>No bookings yet. Our team will add your bookings here.</p></div></td></tr>
-          </tbody>
-        </table>
+      <div class="section-card" style="padding: 16px;">
+        <div style="overflow-x: auto; width: 100%;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Project Name</th>
+                <th>Type</th>
+                <th>Total Amount</th>
+                <th>Amount Paid</th>
+                <th>Balance</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="bookingsTableBody">
+              <tr><td colspan="8"><div class="empty-state"><div class="empty-icon">📦</div><p>No bookings yet. Our team will add your bookings here.</p></div></td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 

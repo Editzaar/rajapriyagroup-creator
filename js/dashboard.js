@@ -64,11 +64,27 @@
 
   /* ---- Sidebar Nav ---- */
   function setupSidebar() {
+    const toggleBtn = document.getElementById('navToggleBtn');
+    const sidebar = document.getElementById('dashSidebar');
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', () => {
+        toggleBtn.classList.toggle('open');
+        sidebar.classList.toggle('open');
+      });
+    }
+
     document.querySelectorAll('.dash-nav-item').forEach(item => {
       item.addEventListener('click', () => {
         document.querySelectorAll('.dash-nav-item').forEach(i => i.classList.remove('active'));
         document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
         item.classList.add('active');
+        
+        // Hide mobile sidebar on selection
+        if (toggleBtn && sidebar) {
+          toggleBtn.classList.remove('open');
+          sidebar.classList.remove('open');
+        }
+
         const panelId = 'panel-' + item.dataset.panel;
         const panel = document.getElementById(panelId);
         if (panel) {
@@ -161,20 +177,22 @@
         <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-value" style="color:#51cf66">₹${totalPaid.toLocaleString('en-IN')}</div><div class="stat-label">Amount Paid</div></div>
         <div class="stat-card"><div class="stat-icon">⏳</div><div class="stat-value" style="color:#ffc107">₹${totalBalance.toLocaleString('en-IN')}</div><div class="stat-label">Balance Due</div></div>
       </div>
-      <div class="section-card">
+      <div class="section-card" style="padding: 16px;">
         <h3>Payment History & Receipts</h3>
-        <table class="data-table">
-          <thead><tr><th>Booking ID</th><th>Project / Service</th><th>Total</th><th>Paid</th><th>Balance</th><th>Payment Method</th><th>Txn / Ref ID</th><th>Status</th></tr></thead>
-          <tbody>${bookings.map(b => `<tr>
-            <td>${esc(b.id)}</td><td>${esc(b.projectName)}</td>
-            <td>₹${(b.totalAmount||0).toLocaleString('en-IN')}</td>
-            <td style="color:#51cf66; font-weight:700;">₹${(b.paidAmount||0).toLocaleString('en-IN')}</td>
-            <td style="color:#ffc107">₹${((b.totalAmount||0)-(b.paidAmount||0)).toLocaleString('en-IN')}</td>
-            <td><span style="font-size:0.8rem; color:var(--color-gold);">${esc(b.payMethod || 'UPI / Online')}</span></td>
-            <td><span style="font-family:monospace; font-size:0.8rem;">${esc(b.txnId || 'N/A')}</span></td>
-            <td>${statusBadge(b.status)}</td>
-          </tr>`).join('')}</tbody>
-        </table>
+        <div style="overflow-x: auto; width: 100%;">
+          <table class="data-table">
+            <thead><tr><th>Booking ID</th><th>Project / Service</th><th>Total</th><th>Paid</th><th>Balance</th><th>Payment Method</th><th>Txn / Ref ID</th><th>Status</th></tr></thead>
+            <tbody>${bookings.map(b => `<tr>
+              <td>${esc(b.id)}</td><td>${esc(b.projectName)}</td>
+              <td>₹${(b.totalAmount||0).toLocaleString('en-IN')}</td>
+              <td style="color:#51cf66; font-weight:700;">₹${(b.paidAmount||0).toLocaleString('en-IN')}</td>
+              <td style="color:#ffc107">₹${((b.totalAmount||0)-(b.paidAmount||0)).toLocaleString('en-IN')}</td>
+              <td><span style="font-size:0.8rem; color:var(--color-gold);">${esc(b.payMethod || 'UPI / Online')}</span></td>
+              <td><span style="font-family:monospace; font-size:0.8rem;">${esc(b.txnId || 'N/A')}</span></td>
+              <td>${statusBadge(b.status)}</td>
+            </tr>`).join('')}</tbody>
+          </table>
+        </div>
       </div>`;
   }
 
