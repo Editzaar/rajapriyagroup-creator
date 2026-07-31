@@ -189,6 +189,7 @@
         ${u.status==='blocked'
           ? `<button class="admin-action-btn success" onclick="ownerUnblock('${u.id}')">Unblock</button>`
           : `<button class="admin-action-btn danger" onclick="ownerBlock('${u.id}')">Block</button>`}
+        <button class="admin-action-btn danger" style="background:#ff3b30;color:#fff" onclick="ownerDeleteClient('${u.id}')">Delete</button>
       </td>
     </tr>`).join('');
   }
@@ -202,6 +203,12 @@
     RPG.Users.unblock(id);
     renderClients();
     toast('Client unblocked.', 'success');
+  };
+  window.ownerDeleteClient = function(id) {
+    if (!confirm('Are you sure you want to permanently delete this client? This will delete their profile and chat history.')) return;
+    RPG.Users.delete(id);
+    renderClients();
+    toast('Client deleted permanently.', 'error');
   };
 
   /* ---- Employees ---- */

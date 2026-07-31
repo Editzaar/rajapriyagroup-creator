@@ -125,6 +125,17 @@
         const users = Users.all().map(u => u.id === id ? { ...u, status: 'active' } : u);
         localStorage.setItem(KEYS.USERS, JSON.stringify(users));
       }
+    },
+    delete: (id) => {
+      if (global.db) {
+        global.db.collection('users').doc(id).delete();
+        global.db.collection('chats').doc(id).delete();
+      } else {
+        localStorage.setItem(KEYS.USERS, JSON.stringify(Users.all().filter(u => u.id !== id)));
+        const chats = readObj(KEYS.CHATS);
+        delete chats[id];
+        localStorage.setItem(KEYS.CHATS, JSON.stringify(chats));
+      }
     }
   };
 
