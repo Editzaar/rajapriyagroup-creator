@@ -21,12 +21,12 @@
 
 <!-- Navbar (minimal) -->
 <header class="navbar">
-  <div class="container">
+  <div class="container" style="display:flex; align-items:center; justify-content:space-between;">
     <a href="index.html" class="nav-brand">
       <img src="images/logo.png" alt="Raja Priya Group" onerror="this.style.display='none'">
       <span class="nav-brand-text">Raja Priya<span>GROUP</span></span>
     </a>
-    <div class="nav-cta" style="margin-left:auto; display:flex; align-items:center;">
+    <div class="dash-top-actions">
       <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle Navigation">
         <span></span>
         <span></span>
@@ -419,6 +419,30 @@
   100% { transform: rotate(360deg); }
 }
 </style>
+
+<!-- Apple VisionOS Mobile Floating Glass Bottom Tab Bar -->
+<div class="apple-bottom-tabbar" id="appleBottomTabbar">
+  <div class="tab-item active" data-panel="overview">
+    <span class="tab-icon">📊</span>
+    <span class="tab-label">Overview</span>
+  </div>
+  <div class="tab-item" data-panel="book">
+    <span class="tab-icon">🛒</span>
+    <span class="tab-label">Book</span>
+  </div>
+  <div class="tab-item" data-panel="payments">
+    <span class="tab-icon">💳</span>
+    <span class="tab-label">Payments</span>
+  </div>
+  <div class="tab-item" data-panel="chat">
+    <span class="tab-icon">💬</span>
+    <span class="tab-label">Chat</span>
+  </div>
+  <div class="tab-item" id="mobileMoreTab">
+    <span class="tab-icon">☰</span>
+    <span class="tab-label">Menu</span>
+  </div>
+</div>
 
 <script src="js/data.js"></script>
 <script src="js/auth.js"></script>

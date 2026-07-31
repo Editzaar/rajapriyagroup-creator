@@ -461,52 +461,167 @@
   gap: 24px;
 }
 
-/* Mobile Toggle Icon */
+/* Dashboard Header Top Actions */
+.dash-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+/* Mobile Toggle Hamburger Icon */
 .nav-toggle-btn {
   display: none;
   flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 16px;
-  background: transparent;
-  border: none;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(201, 162, 75, 0.12);
+  border: 1px solid rgba(201, 162, 75, 0.3);
   cursor: pointer;
   padding: 0;
-  z-index: 1001;
-  margin-left: 15px;
+  z-index: 10001;
+  transition: all 0.3s ease;
+}
+.nav-toggle-btn:hover {
+  background: rgba(201, 162, 75, 0.25);
+  border-color: var(--color-gold);
 }
 
 .nav-toggle-btn span {
-  width: 100%;
+  width: 18px;
   height: 2px;
   background: var(--color-gold);
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.25s ease;
 }
 
-/* Responsive */
+/* Animation to X */
+.nav-toggle-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle-btn.open span:nth-child(2) { opacity: 0; }
+.nav-toggle-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* Apple VisionOS Floating Bottom Glass Tab Bar (Hidden on Desktop) */
+.apple-bottom-tabbar {
+  display: none;
+}
+
+/* ===== RESPONSIVE DASHBOARD (MOBILE & TABLET) ===== */
 @media (max-width: 900px) {
   .nav-toggle-btn {
-    display: flex;
-  }
-  /* Animation to X */
-  .nav-toggle-btn.open span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-  .nav-toggle-btn.open span:nth-child(2) {
-    opacity: 0;
-  }
-  .nav-toggle-btn.open span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
+    display: flex !important;
   }
 
   .dash-grid-2 {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  .dash-sidebar { transform: translateX(-100%); }
-  .dash-sidebar.open { transform: translateX(0); }
-  .dash-content { margin-left: 0; padding: 24px 20px; }
+
+  /* Apple VisionOS Floating Glass Sidebar Drawer */
+  .dash-sidebar {
+    position: fixed !important;
+    top: 14px !important;
+    left: 14px !important;
+    bottom: 14px !important;
+    width: min(300px, calc(100vw - 28px)) !important;
+    height: calc(100dvh - 28px) !important;
+    max-height: calc(100vh - 28px) !important;
+    background: rgba(14, 17, 26, 0.85) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+    backdrop-filter: blur(28px) saturate(190%) !important;
+    border-radius: 24px !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    z-index: 10000 !important;
+    transform: translateX(calc(-100% - 28px)) scale(0.94) !important;
+    transition: transform 0.45s cubic-bezier(0.32, 1.25, 0.32, 1), opacity 0.35s ease !important;
+    box-shadow: 20px 0 60px rgba(0, 0, 0, 0.9), inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 0 40px rgba(201, 162, 75, 0.12) !important;
+    opacity: 0 !important;
+    padding: 24px 0 !important;
+    overflow-y: auto !important;
+  }
+
+  .dash-sidebar.open {
+    transform: translateX(0) scale(1) !important;
+    opacity: 1 !important;
+  }
+
+  .dash-content {
+    margin-left: 0 !important;
+    padding: 20px 16px 95px 16px !important; /* Spacing for bottom floating bar */
+  }
+
+  /* Apple VisionOS Glass Floating Bottom Tab Bar */
+  .apple-bottom-tabbar {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 16px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: min(440px, calc(100vw - 28px)) !important;
+    height: 64px !important;
+    background: rgba(15, 18, 28, 0.82) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+    backdrop-filter: blur(24px) saturate(190%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 32px !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 0 30px rgba(201, 162, 75, 0.15) !important;
+    z-index: 9990 !important;
+    align-items: center !important;
+    justify-content: space-around !important;
+    padding: 0 6px !important;
+  }
+
+  .apple-bottom-tabbar .tab-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+    height: 50px !important;
+    border-radius: 20px !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    cursor: pointer !important;
+    position: relative !important;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  }
+
+  .apple-bottom-tabbar .tab-item .tab-icon {
+    font-size: 1.15rem !important;
+    line-height: 1 !important;
+    margin-bottom: 2px !important;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  }
+
+  .apple-bottom-tabbar .tab-item .tab-label {
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  .apple-bottom-tabbar .tab-item.active {
+    color: var(--color-gold-light) !important;
+    background: rgba(201, 162, 75, 0.18) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  }
+
+  .apple-bottom-tabbar .tab-item.active .tab-icon {
+    transform: translateY(-2px) scale(1.15) !important;
+  }
+
+  .apple-bottom-tabbar .tab-badge {
+    position: absolute !important;
+    top: 4px !important;
+    right: 18px !important;
+    background: #ff4757 !important;
+    color: #fff !important;
+    font-size: 0.62rem !important;
+    font-weight: 800 !important;
+    padding: 1px 5px !important;
+    border-radius: 10px !important;
+  }
 }
 
 @media (max-width: 640px) {

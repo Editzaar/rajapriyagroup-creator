@@ -62,44 +62,78 @@
     });
   }
 
-  /* ---- Sidebar Nav ---- */
+  /* ---- Sidebar & Apple Bottom Tabbar Nav ---- */
   function setupSidebar() {
     const toggleBtn = document.getElementById('navToggleBtn');
     const sidebar = document.getElementById('dashSidebar');
-    if (toggleBtn && sidebar) {
-      toggleBtn.addEventListener('click', () => {
-        toggleBtn.classList.toggle('open');
-        sidebar.classList.toggle('open');
-      });
+    
+    function toggleDrawer(forceState) {
+      if (!toggleBtn || !sidebar) return;
+      const isOpen = forceState !== undefined ? forceState : !sidebar.classList.contains('open');
+      toggleBtn.classList.toggle('open', isOpen);
+      sidebar.classList.toggle('open', isOpen);
     }
 
-    document.querySelectorAll('.dash-nav-item').forEach(item => {
-      item.addEventListener('click', () => {
-        document.querySelectorAll('.dash-nav-item').forEach(i => i.classList.remove('active'));
-        document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
-        item.classList.add('active');
-        
-        // Hide mobile sidebar on selection
-        if (toggleBtn && sidebar) {
-          toggleBtn.classList.remove('open');
-          sidebar.classList.remove('open');
-        }
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', () => toggleDrawer());
+    }
 
-        const panelId = 'panel-' + item.dataset.panel;
-        const panel = document.getElementById(panelId);
-        if (panel) {
-          panel.classList.add('active');
-          // Lazy-load section
-          if (item.dataset.panel === 'bookings') loadBookings();
-          if (item.dataset.panel === 'payments') loadPayments();
-          if (item.dataset.panel === 'training') loadTraining();
-          if (item.dataset.panel === 'announcements') loadAnnouncements();
-          if (item.dataset.panel === 'notifications') loadNotifications();
-          if (item.dataset.panel === 'chat') { startChatPoll(); renderChat(); }
-          if (item.dataset.panel === 'profile') fillProfile();
+    function switchPanel(panelName) {
+      if (!panelName) return;
+      
+      // Update sidebar nav items
+      document.querySelectorAll('.dash-nav-item').forEach(i => {
+        i.classList.toggle('active', i.dataset.panel === panelName);
+      });
+      
+      // Update bottom tabbar items
+      document.querySelectorAll('#appleBottomTabbar .tab-item').forEach(t => {
+        if (t.dataset.panel) {
+          t.classList.toggle('active', t.dataset.panel === panelName);
         }
       });
+
+      // Show panel
+      document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
+      const panelId = 'panel-' + panelName;
+      const panel = document.getElementById(panelId);
+      if (panel) {
+        panel.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Lazy-load section
+        if (panelName === 'bookings') loadBookings();
+        if (panelName === 'payments') loadPayments();
+        if (panelName === 'training') loadTraining();
+        if (panelName === 'announcements') loadAnnouncements();
+        if (panelName === 'notifications') loadNotifications();
+        if (panelName === 'chat') { startChatPoll(); renderChat(); }
+        if (panelName === 'profile') fillProfile();
+      }
+      
+      // Close mobile drawer if open
+      toggleDrawer(false);
+    }
+
+    // Sidebar items click listener
+    document.querySelectorAll('.dash-nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        switchPanel(item.dataset.panel);
+      });
     });
+
+    // Apple bottom tabbar click listener
+    const bottomTabbar = document.getElementById('appleBottomTabbar');
+    if (bottomTabbar) {
+      bottomTabbar.querySelectorAll('.tab-item').forEach(tab => {
+        tab.addEventListener('click', () => {
+          if (tab.id === 'mobileMoreTab') {
+            toggleDrawer();
+          } else if (tab.dataset.panel) {
+            switchPanel(tab.dataset.panel);
+          }
+        });
+      });
+    }
   }
 
   /* ---- Overview ---- */
