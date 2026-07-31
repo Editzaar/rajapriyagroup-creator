@@ -16,24 +16,45 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* ---- Mobile nav toggle ---- */
+  /* ---- Mobile nav toggle & Scrim Backdrop ---- */
   const navToggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
+  let navScrim = document.getElementById('mobileNavScrim');
+
+  if (!navScrim && navLinks) {
+    navScrim = document.createElement('div');
+    navScrim.id = 'mobileNavScrim';
+    navScrim.className = 'mobile-nav-scrim';
+    document.body.appendChild(navScrim);
+  }
+
+  function closeMobileMenu() {
+    if (navLinks) navLinks.classList.remove('mobile-open');
+    if (navToggle) navToggle.classList.remove('is-active');
+    if (navScrim) navScrim.classList.remove('active');
+    document.body.style.overflow = '';
+  }
 
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('mobile-open');
       navToggle.classList.toggle('is-active', isOpen);
+      if (navScrim) navScrim.classList.toggle('active', isOpen);
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
+    if (navScrim) {
+      navScrim.addEventListener('click', closeMobileMenu);
+    }
+
     // Close menu when a link is tapped
     navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('mobile-open');
-        navToggle.classList.remove('is-active');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMobileMenu();
     });
   }
 
