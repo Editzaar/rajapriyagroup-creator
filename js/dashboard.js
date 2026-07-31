@@ -344,7 +344,7 @@
       if (upiAmtLabel) upiAmtLabel.textContent = '₹' + amount;
       
       const qrImg = document.getElementById('upiDynamicQr');
-      const intentUrl = `upi://pay?pa=rajapriyagroup@upi&pn=Raja%20Priya%20Group&am=${amount}&cu=INR&tn=${encodeURIComponent(projName)}`;
+      const intentUrl = `upi://pay?pa=nbikram704@okhdfcbank&pn=Bikram%20Nath&am=${amount}&cu=INR&tn=${encodeURIComponent(projName)}`;
       if (qrImg) {
         qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(intentUrl)}`;
       }
