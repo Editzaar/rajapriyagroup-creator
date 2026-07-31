@@ -475,21 +475,24 @@
     if (!users.length) { el.innerHTML='<p style="padding:16px;color:var(--color-gray);font-size:.85rem">No clients yet.</p>'; return; }
     
     // Sort chat list dynamically:
-    // 1. Unread chat threads first
-    // 2. Otherwise, threads with the most recent messages
-    // 3. Otherwise, sort by registration time (timestamp)
+    // Sorted strictly by the last message time (most recent first, like WhatsApp)
     users.sort((a, b) => {
-      const unreadA = RPG.Chat.unreadCount(a.id, 'owner') > 0 ? 1 : 0;
-      const unreadB = RPG.Chat.unreadCount(b.id, 'owner') > 0 ? 1 : 0;
-      if (unreadA !== unreadB) return unreadB - unreadA;
-
       const threadA = RPG.Chat.getThread(a.id);
       const threadB = RPG.Chat.getThread(b.id);
       const lastA = threadA[threadA.length - 1];
       const lastB = threadB[threadB.length - 1];
 
-      const timeA = lastA ? (lastA.timestamp || 0) : 0;
-      const timeB = lastB ? (lastB.timestamp || 0) : 0;
+      const getMsgTime = (msg) => {
+        if (!msg) return 0;
+        if (msg.timestamp) return msg.timestamp;
+        try {
+          const parsed = Date.parse(msg.time);
+          return isNaN(parsed) ? 0 : parsed;
+        } catch(e) { return 0; }
+      };
+
+      const timeA = getMsgTime(lastA);
+      const timeB = getMsgTime(lastB);
       if (timeA !== timeB) return timeB - timeA;
 
       return (b.timestamp || 0) - (a.timestamp || 0);
