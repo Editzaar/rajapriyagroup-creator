@@ -167,14 +167,20 @@
     all: () => read(KEYS.EMPLOYEES),
     find: (id) => Employees.all().find(e => e.id === id),
     findByPin: (val) => {
-      const v = (val || '').trim().toLowerCase();
+      const v = (val || '').trim();
       return Employees.all().find(e => 
         e.status === 'active' && (
-          (e.pin && e.pin.toLowerCase() === v) ||
-          (e.pin && e.pin === val) ||
-          (e.password && e.password === val) ||
-          (e.email && e.email.toLowerCase() === v)
+          (e.pin && e.pin === v) ||
+          (e.password && e.password === v)
         )
+      );
+    },
+    findByEmailAndPassword: (email, password) => {
+      const em = (email || '').trim().toLowerCase();
+      return Employees.all().find(e =>
+        e.status === 'active' &&
+        e.email && e.email.toLowerCase() === em &&
+        e.password && e.password === password
       );
     },
     create: (data) => {

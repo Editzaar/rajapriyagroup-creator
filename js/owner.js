@@ -82,6 +82,7 @@
       else if (tabId === 'training') renderTraining();
       else if (tabId === 'announcements') renderAnnouncements();
       else if (tabId === 'auditlog') renderAuditLog(document.getElementById('auditSearch')?.value);
+      else if (tabId === 'allchats') { renderOwnerChatList(); if (activeChatId) renderOwnerChatMessages(); }
 
       populateClientDropdown('ownerMbClient');
       populateClientDropdown('ownerTrClient');
@@ -101,6 +102,7 @@
       else if (tabId === 'training') renderTraining();
       else if (tabId === 'announcements') renderAnnouncements();
       else if (tabId === 'auditlog') renderAuditLog(document.getElementById('auditSearch')?.value);
+      else if (tabId === 'allchats') { renderOwnerChatList(); if (activeChatId) renderOwnerChatMessages(); }
 
       populateClientDropdown('ownerMbClient');
       populateClientDropdown('ownerTrClient');

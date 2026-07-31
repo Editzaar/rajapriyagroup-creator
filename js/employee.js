@@ -31,9 +31,19 @@
 
   function verifyPin() {
     const pin = document.getElementById('empPinInput').value.trim();
-    const emp = RPG.Employees.findByPin(pin);
+    const emailInput = document.getElementById('empEmailInput');
+    const email = emailInput ? emailInput.value.trim() : '';
+    
+    let emp = null;
+    // If both email + pin/password fields provided, try email+password first
+    if (email && pin) {
+      emp = RPG.Employees.findByEmailAndPassword(email, pin);
+    }
+    // Fallback: match by PIN or password alone
+    if (!emp) emp = RPG.Employees.findByPin(pin);
+    
     if (!emp) {
-      document.getElementById('empPinError').textContent = 'Invalid PIN or account deactivated.';
+      document.getElementById('empPinError').textContent = 'Invalid credentials or account deactivated.';
       return;
     }
     currentEmp = emp;
@@ -99,6 +109,7 @@
       else if (tabId === 'payments') renderPayments();
       else if (tabId === 'projects') renderProjects();
       else if (tabId === 'announcements') renderAnnouncements();
+      else if (tabId === 'chat') { renderChatList(); if (activeChatClientId) renderChatMessages(); }
     }, 2000);
 
     // Instant real-time update when data changes in any tab/window
@@ -113,6 +124,7 @@
       else if (tabId === 'payments') renderPayments();
       else if (tabId === 'projects') renderProjects();
       else if (tabId === 'announcements') renderAnnouncements();
+      else if (tabId === 'chat') { renderChatList(); if (activeChatClientId) renderChatMessages(); }
     });
   }
 

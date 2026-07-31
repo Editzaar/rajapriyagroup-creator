@@ -29,6 +29,20 @@
     setupBookService();
     updateBadges();
     setInterval(updateBadges, 3000);
+
+    // Instant refresh when data changes in any tab (e.g. staff replies to chat)
+    window.addEventListener('rpg_data_changed', function () {
+      updateBadges();
+      const activePanel = document.querySelector('.dash-panel.active');
+      if (!activePanel) return;
+      const panelId = activePanel.id.replace('panel-', '');
+      if (panelId === 'overview') loadOverview();
+      else if (panelId === 'bookings') loadBookings();
+      else if (panelId === 'payments') loadPayments();
+      else if (panelId === 'announcements') loadAnnouncements();
+      else if (panelId === 'notifications') loadNotifications();
+      else if (panelId === 'chat') renderChat();
+    });
   }
 
   /* ---- Sidebar User Header ---- */
