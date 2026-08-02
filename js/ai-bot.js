@@ -2,6 +2,7 @@
    RAJA PRIYA GROUP — SMART AI ASSISTANT CHATBOT
    Multi-language (EN / TE / HI), auto-reply, estimation calculator,
    and automated Cloud Firestore lead capture.
+   Focus: Video Editing, Website Development, Brand Promotions, Social Media.
    ========================================================= */
 
 (function () {
@@ -15,48 +16,48 @@
     en: {
       botName: 'Raja Priya AI Assistant',
       onlineStatus: 'Online 24/7',
-      welcome: 'Hello! 👋 Welcome to **Raja Priya Group** — your complete real estate, construction, branding, and social media partner in Hyderabad. How can I help you today?',
+      welcome: 'Hello! 👋 Welcome to **Raja Priya Group** — your complete partner for Video Editing, Website Development, Brand Promotions, and Social Media Management. How can I help you today?',
       quickOptions: [
-        { label: '📍 Open Plots', query: 'plots' },
-        { label: '🏗️ Construction Rates', query: 'construction' },
-        { label: '🚀 Brand Promotion', query: 'brand' },
+        { label: '🎬 Video Editing', query: 'video' },
+        { label: '💻 Website Development', query: 'web' },
+        { label: '🚀 Brand Promotions', query: 'brand' },
         { label: '📱 Social Media Management', query: 'social' },
-        { label: '📅 Book Site Visit', query: 'visit' },
+        { label: '📅 Request Consultation', query: 'consult' },
         { label: '📞 Call Support', query: 'contact' }
       ],
-      placeholder: 'Type your message or query...',
+      placeholder: 'Type your message or service requirement...',
       responses: {
-        plots: '📍 **Open Plots & Real Estate**:\nWe offer premium HMDA & DTCP approved open plot layouts in Shankarpally, Kompally, and Pharma City. Clear titles, spot registration, and 100% bank loan assistance.\n\nWould you like to schedule a free site visit?',
-        construction: '🏗️ **Construction Services**:\nWe build luxury residential villas and commercial towers in Hyderabad starting from **₹1,850/sq.ft.** (turnkey package including architectural design, raw materials, and interior finishing).\n\nWould you like an estimated quote for your plot size?',
-        brand: '🚀 **Brand Promotions**:\nWe offer digital branding, PR campaigns, local business promotion strategies, and targeted lead generation ads starting at affordable packages.',
-        social: '📱 **Social Media Handling**:\nEnd-to-end Instagram/Facebook page handling, 4K Reels production, graphic posts, and active ad campaign setup to grow your business inquiries.',
+        video: '🎬 **Video Editing Services**:\nWe offer Instagram Reels Editing, Motion Graphics & Animation, YouTube Video Editing, Short-Form Content, Color Grading, and Sound Design.\n\nWould you like a custom price quote for your video project?',
+        web: '💻 **Website Development**:\nWe build high-performance Business Websites, Landing Pages, WordPress sites, WooCommerce E-commerce stores, and provide ongoing Website Maintenance.\n\nWould you like to get a quote for a new website?',
+        brand: '🚀 **Brand Promotions**:\nWe offer Brand Strategy, Digital Marketing, Performance Marketing, Creative Ad Campaigns, and Targeted Lead Generation.',
+        social: '📱 **Social Media Management**:\nEnd-to-end Social Media Handling, Content Planning, Creative Post Design, 4K Reels & Video Production, and Business Growth Campaigns.',
         contact: '📞 **Contact Us**:\n- **Phone**: [9476766340](tel:9476766340)\n- **WhatsApp**: [Click to Chat](https://wa.me/919476766340)\n- **Office**: Plot No. 13, Road No. 9, Jubilee Hills, Hyderabad.',
-        visitPrompt: 'Great! Please enter your **Full Name** to book a free site visit:',
-        phonePrompt: 'Thank you, {NAME}! Please enter your **10-digit Mobile Number** so our team can confirm your appointment:',
-        leadSuccess: '✅ **Thank you, {NAME}!** Your site visit request has been received. Our manager will call you at **{PHONE}** shortly!',
-        defaultMsg: 'Thank you for reaching out! You can choose an option below or call our manager directly at **9476766340**.'
+        consultPrompt: 'Great! Please enter your **Full Name** to book a free creative consultation:',
+        phonePrompt: 'Thank you, {NAME}! Please enter your **10-digit Mobile Number** so our manager can call you:',
+        leadSuccess: '✅ **Thank you, {NAME}!** Your consultation request has been received. Our manager will call you at **{PHONE}** shortly!',
+        defaultMsg: 'Thank you for reaching out! You can choose an option below or call our team directly at **9476766340**.'
       }
     },
     te: {
       botName: 'రాజా ప్రియా AI అసిస్టెంట్',
       onlineStatus: 'ఆన్‌లైన్ 24/7',
-      welcome: 'నమస్కారం! 👋 **రాజా ప్రియా గ్రూప్** కు స్వాగతం. రియల్ ఎస్టేట్ ఓపెన్ ప్లాట్లు, ఇళ్ల నిర్మాణం, బ్రాండింగ్ మరియు సోషల్ మీడియా సేవలకు మేము మీ నమ్మకమైన భాగస్వామివి. మీకు ఎలా సహాయపడగలను?',
+      welcome: 'నమస్కారం! 👋 **రాజా ప్రియా గ్రూప్** కు స్వాగతం. వీడియో ఎడిటింగ్, వెబ్‌సైట్ డెవలప్‌మెంట్, బ్రాండ్ ప్రమోషన్లు మరియు సోషల్ మీడియా మేనేజ్‌మెంట్ సేవలకు మేము మీ భాగస్వామివి. మీకు ఎలా సహాయపడగలను?',
       quickOptions: [
-        { label: '📍 ఓపెన్ ప్లాట్లు', query: 'plots' },
-        { label: '🏗️ ఇంటి నిర్మాణ ధరకు వివరాలు', query: 'construction' },
-        { label: '🚀 బ్రాండ్ ప్రమోషన్', query: 'brand' },
-        { label: '📱 సోషల్ మీడియా నిర్వహణ', query: 'social' },
-        { label: '📅 ప్లాట్ విజిట్ బుక్ చేయండి', query: 'visit' },
+        { label: '🎬 వీడియో ఎడిటింగ్', query: 'video' },
+        { label: '💻 వెబ్‌సైట్ డెవలప్‌మెంట్', query: 'web' },
+        { label: '🚀 బ్రాండ్ ప్రమోషన్లు', query: 'brand' },
+        { label: '📱 సోషల్ మీడియా మేనేజ్‌మెంట్', query: 'social' },
+        { label: '📅 సలహా కొరకు బుక్ చేయండి', query: 'consult' },
         { label: '📞 కాల్ చేయండి', query: 'contact' }
       ],
       placeholder: 'మీ సందేశాన్ని ఇక్కడ టైప్ చేయండి...',
       responses: {
-        plots: '📍 **ఓపెన్ ప్లాట్లు వివరాలు**:\nశంకర్పల్లి, కొంపల్లి మరియు ఫార్మా సిటీలలో HMDA & DTCP లేఅవుట్ ఓపెన్ ప్లాట్లు అందుబాటులో ఉన్నాయి. క్లియర్ టైటిల్ మరియు బ్యాంక్ లోన్ సదుపాయం కలదు.\n\nమీరు ఉచిత సైట్ విజిట్ బుక్ చేయాలనుకుంటున్నారా?',
-        construction: '🏗️ **ఇంటి నిర్మాణం**:\nహైదరాబాద్‌లో నివాస విల్లాలు మరియు వాణిజ్య భవనాల నిర్మాణం చదరపు అడుగుకు **₹1,850** నుండి ప్రారంభమవుతుంది.',
-        brand: '🚀 **బ్రాండ్ ప్రమోషన్లు**:\nమీ బిజినెస్ ప్రమోషన్, డిజిటల్ మార్కెటింగ్ మరియు కస్టమర్ లీడ్స్ కొరకు ప్యాకేజీలు అందుబాటులో ఉన్నాయి.',
-        social: '📱 **సోషల్ మీడియా మేనేజ్‌మెంట్**:\nఇన్‌స్టాగ్రామ్ పేజీ నిర్వహణ, రీల్స్ వీడియో షూట్ మరియు బిజినెస్ గ్రోత్ క్యాంపెయిన్లు.',
-        contact: '📞 **మమ్మల్ని సంప్రదించండి**:\n- **ఫోన్**: [9476766340](tel:9476766340)\n- **వాట్సాప్**: [ఇక్కడ క్లిక్ చేయండి](https://wa.me/919476766340)\n- **ఆఫీస్**: ప్లాట్ నెం. 13, రోడ్ నెం. 9, జూబ్లీ హిల్స్, హైదరాబాద్.',
-        visitPrompt: 'ధన్యవాదాలు! సైట్ విజిట్ కొరకు మీ **పూర్తి పేరు** నమోదు చేయండి:',
+        video: '🎬 **వీడియో ఎడిటింగ్ సేవలు**:\nఇన్‌స్టాగ్రామ్ రీల్స్ ఎడిటింగ్, మోషన్ గ్రాఫిక్స్, యూట్యూబ్ వీడియో ఎడిటింగ్, కలర్ గ్రేడింగ్ మరియు సౌండ్ డిజైన్ సేవలు అందుబాటులో ఉన్నాయి.',
+        web: '💻 **వెబ్‌సైట్ డెవలప్‌మెంట్**:\nబిజినెస్ వెబ్‌సైట్లు, ల్యాండింగ్ పేజీలు, వర్డ్‌ప్రెస్ డెవలప్‌మెంట్ మరియు ఈ-కామర్స్ ఆన్‌లైన్ స్టోర్‌ల నిర్మాణం.',
+        brand: '🚀 **బ్రాండ్ ప్రమోషన్లు**:\nడిజిటల్ మార్కెటింగ్, పెర్ఫార్మెన్స్ మార్కెటింగ్, బ్రాండింగ్ స్ట్రాటజీ మరియు లీడ్ జనరేషన్.',
+        social: '📱 **సోషల్ మీడియా మేనేజ్‌మెంట్**:\nఇన్‌స్టాగ్రామ్ పేజీ నిర్వహణ, కంటెంట్ ప్లానింగ్, పోస్ట్ డిజైన్ మరియు రీల్స్ ప్రొడక్షన్.',
+        contact: '📞 **మమ్మల్ని సంప్రదించండి**:\n- **ఫోన్**: [9476766340](tel:9476766340)\n- **వాట్సాప్**: [ఇక్కడ క్లిక్ చేయండి](https://wa.me/919476766340)\n- **ఆఫీస్**: జూబ్లీ హిల్స్, హైదరాబాద్.',
+        consultPrompt: 'ధన్యవాదాలు! ఉచిత కన్సల్టేషన్ కొరకు మీ **పూర్తి పేరు** నమోదు చేయండి:',
         phonePrompt: 'ధన్యవాదాలు, {NAME}! మీ **10 అంకెల మొబైల్ నంబర్** నమోదు చేయండి:',
         leadSuccess: '✅ **ధన్యవాదాలు {NAME}!** మీ వివరాలు నమోదయ్యాయి. మా మేనేజర్ త్వరలోనే **{PHONE}** కు కాల్ చేస్తారు.',
         defaultMsg: 'ధన్యవాదాలు! మరిన్ని వివరాలకు ఉచితంగా కాల్ చేయండి: **9476766340**.'
@@ -65,25 +66,25 @@
     hi: {
       botName: 'राजा प्रिया AI असिस्टेंट',
       onlineStatus: 'ऑनलाइन 24/7',
-      welcome: 'नमस्ते! 👋 **राजा प्रिया ग्रुप** में आपका स्वागत है। ओपन प्लॉट्स, कंस्ट्रक्शन और ब्रांड प्रमोशन के लिए हम आपके भरोसेमंद पार्टनर हैं। आज हम आपकी क्या सहायता कर सकते हैं?',
+      welcome: 'नमस्ते! 👋 **राजा प्रिया ग्रुप** में आपका स्वागत है। वीडियो एडिटिंग, वेबसाइट डेवलपमेंट, ब्रांड प्रमोशन और सोशल मीडिया मैनेजमेंट के लिए हम आपके डिजिटल पार्टनर हैं। आज हम आपकी क्या सहायता कर सकते हैं?',
       quickOptions: [
-        { label: '📍 ओपन प्लॉट्स', query: 'plots' },
-        { label: '🏗️ कंस्ट्रक्शन रेट्स', query: 'construction' },
+        { label: '🎬 वीडियो एडिटिंग', query: 'video' },
+        { label: '💻 वेबसाइट डेवलपमेंट', query: 'web' },
         { label: '🚀 ब्रांड प्रमोशन', query: 'brand' },
         { label: '📱 सोशल मीडिया मैनेजमेंट', query: 'social' },
-        { label: '📅 साइट विजिट बुक करें', query: 'visit' },
+        { label: '📅 कंसल्टेशन बुक करें', query: 'consult' },
         { label: '📞 कॉल करें', query: 'contact' }
       ],
       placeholder: 'अपना संदेश यहां टाइप करें...',
       responses: {
-        plots: '📍 **ओपन प्लॉट्स**:\nशंकरपल्ली, कंपल्ली और फार्मा सिटी में HMDA और DTCP एप्रूव्ड प्लॉट्स उपलब्ध हैं। 100% बैंक लोन सहायता उपलब्ध है।\n\nक्या आप फ्री साइट विजिट बुक करना चाहते हैं?',
-        construction: '🏗️ **कंस्ट्रक्शन सर्विस**:\nहैदराबाद में विला और कमर्शियल बिल्डिंग का निर्माण केवल **₹1,850/sq.ft.** से शुरू होता है।',
-        brand: '🚀 **ब्रांड प्रमोशन**:\nबिजनेस ब्रांडिंग और डिजिटल मार्केटिंग कैम्पेन उपलब्ध हैं।',
-        social: '📱 **सोशल मीडिया हैंडलिंग**:\nइंस्टाग्राम रील्स शूटिंग, कंटेंट क्रिएशन और बिजनेस ग्रोथ कैम्पेन्स।',
-        contact: '📞 **संपर्क करें**:\n- **फोन**: [9476766340](tel:9476766340)\n- **व्हाट्सएप**: [चैट करें](https://wa.me/919476766340)\n- **कार्यालय**: प्लॉट नं 13, रोड नं 9, जुबली हिल्स, हैदराबाद।',
-        visitPrompt: 'धन्यवाद! साइट विजिट के लिए अपना **पूरा नाम** दर्ज करें:',
+        video: '🎬 **वीडियो एडिटिंग सर्विसेज**:\nइंस्टाग्राम रील्स एडिटिंग, मोशन ग्राफिक्स, यूट्यूब वीडियो एडिटिंग, शॉर्ट-फॉर्म कंटेंट और कलर ग्रेडिंग सर्विसेज।',
+        web: '💻 **वेबसाइट डेवलपमेंट**:\nबिजनेस वेबसाइट्स, लैंडिंग पेज, वर्डप्रेस और ई-कॉमर्स ऑनलाइन स्टोर्स।',
+        brand: '🚀 **ब्रांड प्रमोशन**:\nडिजिटल मार्केटिंग, ब्रांड स्ट्रेटेजी और कस्टमर लीड जनरेशन।',
+        social: '📱 **सोशल मीडिया मैनेजमेंट**:\nसोशल मीडिया हैंडलिंग, रील्स प्रोडक्शन, पोस्ट डिजाइनिंग और बिजनेस ग्रोथ।',
+        contact: '📞 **संपर्क करें**:\n- **फोन**: [9476766340](tel:9476766340)\n- **व्हाट्सएप**: [चैट करें](https://wa.me/919476766340)\n- **कार्यालय**: जुबली हिल्स, हैदराबाद।',
+        consultPrompt: 'धन्यवाद! फ्री कंसल्टेशन के लिए अपना **पूरा नाम** दर्ज करें:',
         phonePrompt: 'धन्यवाद, {NAME}! अपना **10 अंकों का मोबाइल नंबर** दर्ज करें:',
-        leadSuccess: '✅ **धन्यवाद {NAME}!** आपकी साइट विजिट रिक्वेस्ट मिल गई है। हमारे मैनेजर जल्द ही आपको **{PHONE}** पर कॉल करेंगे।',
+        leadSuccess: '✅ **धन्यवाद {NAME}!** आपकी रिक्वेस्ट मिल गई है। हमारे मैनेजर जल्द ही आपको **{PHONE}** पर कॉल करेंगे।',
         defaultMsg: 'धन्यवाद! अधिक जानकारी के लिए सीधे कॉल करें: **9476766340**.'
       }
     }
@@ -189,7 +190,6 @@
     const msgContainer = document.getElementById('aiBotMessages');
     const bubble = document.createElement('div');
     bubble.className = `ai-msg-bubble ${sender}`;
-    // Simple markdown formatting
     let html = text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" style="color:var(--color-gold-light); font-weight:700;">$1</a>')
@@ -225,7 +225,6 @@
     appendBubble(val, 'user');
     input.value = '';
 
-    // If capturing lead
     if (leadState.step === 1) {
       leadState.name = val;
       leadState.step = 2;
@@ -243,24 +242,23 @@
       return;
     }
 
-    // Match keywords
     const lower = val.toLowerCase();
     let query = 'default';
-    if (lower.includes('plot') || lower.includes('land') || lower.includes('ప్లాట్') || lower.includes('प्लॉट')) query = 'plots';
-    else if (lower.includes('construct') || lower.includes('house') || lower.includes('villa') || lower.includes('ఇల్లు') || lower.includes('मकान')) query = 'construction';
+    if (lower.includes('video') || lower.includes('reel') || lower.includes('edit') || lower.includes('వీడియో') || lower.includes('वीडियो')) query = 'video';
+    else if (lower.includes('web') || lower.includes('site') || lower.includes('wordpress') || lower.includes('వెబ్‌సైట్') || lower.includes('वेबसाइट')) query = 'web';
     else if (lower.includes('brand') || lower.includes('market') || lower.includes('ప్రమోషన్')) query = 'brand';
-    else if (lower.includes('social') || lower.includes('reels') || lower.includes('instagram')) query = 'social';
+    else if (lower.includes('social') || lower.includes('instagram') || lower.includes('facebook')) query = 'social';
     else if (lower.includes('call') || lower.includes('phone') || lower.includes('number') || lower.includes('contact')) query = 'contact';
-    else if (lower.includes('visit') || lower.includes('book') || lower.includes('విజిట్')) query = 'visit';
+    else if (lower.includes('consult') || lower.includes('book')) query = 'consult';
 
     handleIntent(query);
   }
 
   function handleIntent(query) {
     const data = DICT[currentLang];
-    if (query === 'visit') {
-      leadState = { step: 1, name: '', phone: '', service: 'Site Visit Booking' };
-      setTimeout(() => appendBubble(data.responses.visitPrompt, 'bot'), 400);
+    if (query === 'consult') {
+      leadState = { step: 1, name: '', phone: '', service: 'Creative Consultation' };
+      setTimeout(() => appendBubble(data.responses.consultPrompt, 'bot'), 400);
       return;
     }
 
@@ -271,14 +269,13 @@
     }, 400);
   }
 
-  /* ---- Save Lead to Cloud Firestore ---- */
   function saveLeadToDatabase(name, phone, service) {
     try {
       const lead = {
         id: 'LEAD_' + Date.now(),
         name: name,
         phone: phone,
-        service: service || 'General Inquiry',
+        service: service || 'Creative Inquiry',
         date: new Date().toISOString(),
         status: 'New'
       };
@@ -295,7 +292,6 @@
     }
   }
 
-  /* ---- Auto Initialize on DOM Load ---- */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', injectAIBotHTML);
   } else {
