@@ -1,0 +1,372 @@
+/* =========================================================
+   RAJA PRIYA GROUP — INDUSTRY-SPECIFIC HUBS & VISUAL SHOWCASE
+   Tailored UI for Video Editing, Web Dev, Brand & Social Media
+   ========================================================= */
+
+/* Industry Section Layout */
+.industry-hub-section {
+  padding: 80px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+.industry-hub-header {
+  margin-bottom: 40px;
+}
+
+.industry-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(201, 162, 75, 0.12);
+  border: 1px solid rgba(201, 162, 75, 0.3);
+  color: var(--color-gold-light);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* Sub-category Chips Ribbon */
+.sub-category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.chip-tag {
+  padding: 6px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-cream);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.chip-tag:hover {
+  background: rgba(201, 162, 75, 0.15);
+  border-color: var(--color-gold);
+  color: var(--color-gold-light);
+}
+
+/* 🎬 1. VIDEO EDITING HUB — Reel & Video Cards */
+.video-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.reel-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #0f121a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  aspect-ratio: 9 / 14;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px;
+}
+
+.reel-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--color-gold);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(201, 162, 75, 0.2);
+}
+
+.reel-media-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.reel-card:hover .reel-media-bg {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.reel-play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: rgba(201, 162, 75, 0.85);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 1.4rem;
+  box-shadow: 0 8px 24px rgba(201, 162, 75, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.reel-card:hover .reel-play-overlay {
+  transform: translate(-50%, -50%) scale(1.15);
+  background: var(--gradient-gold);
+}
+
+.reel-header-tags {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badge-4k {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.reel-info-bottom {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.95) 100%);
+  margin: -18px;
+  padding: 24px 18px 18px;
+}
+
+.reel-info-bottom h3 {
+  font-size: 1.15rem;
+  color: #fff;
+  font-family: var(--font-display);
+  margin-bottom: 4px;
+}
+
+.reel-info-bottom p {
+  font-size: 0.8rem;
+  color: var(--color-gold-light);
+  font-weight: 600;
+}
+
+/* 💻 2. WEBSITE DEVELOPMENT HUB — Browser Window Mockups */
+.web-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+.browser-mockup {
+  background: #11141f;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  transition: all 0.35s ease;
+}
+
+.browser-mockup:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-gold);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(201, 162, 75, 0.15);
+}
+
+.browser-top-bar {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.browser-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.browser-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.browser-url-bar {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 4px 12px;
+  font-size: 0.72rem;
+  color: var(--color-gray);
+  font-family: monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.browser-body {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.browser-body img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.browser-footer {
+  padding: 20px;
+}
+
+.browser-footer h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.browser-footer p {
+  font-size: 0.84rem;
+  color: var(--color-gray);
+  margin-bottom: 14px;
+}
+
+.tech-stack-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tech-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(201, 162, 75, 0.1);
+  color: var(--color-gold-light);
+  border: 1px solid rgba(201, 162, 75, 0.25);
+}
+
+/* 🚀 3. BRAND PROMOTIONS HUB — ROI & Case Study Cards */
+.brand-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.case-study-card {
+  background: linear-gradient(165deg, #131722 0%, #0b0d14 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 24px;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.case-study-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-gold);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+}
+
+.metric-stat-box {
+  display: inline-block;
+  background: rgba(201, 162, 75, 0.12);
+  border: 1px solid rgba(201, 162, 75, 0.3);
+  padding: 10px 16px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-gold-light);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-cream);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* 📱 4. SOCIAL MEDIA MANAGEMENT HUB — Phone & Grid Preview */
+.social-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.social-preview-card {
+  background: #11141f;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  padding: 20px;
+  transition: all 0.35s ease;
+}
+
+.social-preview-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-gold);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+}
+
+.insta-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.insta-handle {
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: #fff;
+}
+
+.insta-grid-mini {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.insta-grid-mini img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .industry-hub-section {
+    padding: 56px 0;
+  }
+}

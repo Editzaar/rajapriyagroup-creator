@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="css/auth.css">
 <link rel="stylesheet" href="css/projects.css">
 <link rel="stylesheet" href="css/ai-bot.css">
+<link rel="stylesheet" href="css/industry-hubs.css">
 
 <!-- Firebase compat SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -49,99 +50,209 @@
 <section class="page-hero">
   <div class="container">
     <p class="eyebrow reveal">Our Work</p>
-    <h1 class="page-title reveal">Projects Portfolio</h1>
-    <p class="page-sub reveal">A showcase of video editing campaigns, web development portals, brand strategies, and social media growth delivered for our clients.</p>
+    <h1 class="page-title reveal">Industry Hubs &amp; Showcase</h1>
+    <p class="page-sub reveal">Four specialized digital media industries, structured with industry-tailored showcases and sub-category previews.</p>
   </div>
 </section>
 
-<!-- ============ FILTERS + GRID ============ -->
-<section class="projects-section">
+<!-- ============ 🎬 1. VIDEO EDITING INDUSTRY HUB ============ -->
+<section class="industry-hub-section" id="hub-video">
   <div class="container">
-    <div class="filter-bar reveal" role="tablist" aria-label="Filter projects">
-      <button class="filter-btn is-active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="video">Video Editing</button>
-      <button class="filter-btn" data-filter="web">Web Development</button>
-      <button class="filter-btn" data-filter="brand">Brand Promotions</button>
-      <button class="filter-btn" data-filter="social">Social Media</button>
+    <div class="industry-hub-header reveal">
+      <span class="industry-badge">🎬 Industry 01 &bull; Video Editing</span>
+      <h2 class="section-heading">Cinema-Grade Video Editing &amp; Reel Production</h2>
+      <p class="section-sub">High-converting short-form Reels, 4K YouTube videos, motion graphics, and professional color grading.</p>
+      
+      <div class="sub-category-chips">
+        <span class="chip-tag">Instagram Reels Editing</span>
+        <span class="chip-tag">Motion Graphics &amp; Animation</span>
+        <span class="chip-tag">YouTube Video Editing</span>
+        <span class="chip-tag">Short-Form Content</span>
+        <span class="chip-tag">Color Grading &amp; Sound Design</span>
+      </div>
     </div>
 
-    <div class="projects-full-grid">
-
-      <article class="project-full-card reveal" data-category="video">
-        <div class="project-full-media">
-          <img src="images/projects/plot-01.jpg" alt="Instagram Reels Campaign" onerror="this.parentElement.classList.add('img-fallback')">
-          <span class="status-tag status-completed">Completed</span>
+    <div class="video-hub-grid">
+      <article class="reel-card reveal">
+        <div class="reel-header-tags">
+          <span class="badge-4k">4K HDR</span>
+          <span class="chip-tag" style="padding:2px 8px; font-size:0.68rem;">9:16 Vertical</span>
         </div>
-        <div class="project-full-body">
-          <span class="project-tag">Video Editing</span>
-          <h3>Luxury Fashion Reels Campaign</h3>
+        <div class="reel-play-overlay">▶</div>
+        <div class="reel-info-bottom">
+          <h3>Luxury Fashion Reels</h3>
           <p>Instagram Reels &amp; Color Grading</p>
         </div>
       </article>
 
-      <article class="project-full-card reveal" data-category="web">
-        <div class="project-full-media">
-          <img src="images/projects/villa-01.jpg" alt="Corporate Business Portal" onerror="this.parentElement.classList.add('img-fallback')">
-          <span class="status-tag status-completed">Completed</span>
+      <article class="reel-card reveal">
+        <div class="reel-header-tags">
+          <span class="badge-4k">60 FPS</span>
+          <span class="chip-tag" style="padding:2px 8px; font-size:0.68rem;">16:9 Cinema</span>
         </div>
-        <div class="project-full-body">
-          <span class="project-tag">Web Development</span>
-          <h3>Corporate Business Portal</h3>
-          <p>Full-Stack Web Development</p>
-        </div>
-      </article>
-
-      <article class="project-full-card reveal" data-category="brand">
-        <div class="project-full-media">
-          <img src="images/projects/commercial-01.jpg" alt="Performance Growth Campaign" onerror="this.parentElement.classList.add('img-fallback')">
-          <span class="status-tag status-completed">Completed</span>
-        </div>
-        <div class="project-full-body">
-          <span class="project-tag">Brand Promotions</span>
-          <h3>Performance Growth Campaign</h3>
-          <p>Digital Marketing &amp; Lead Generation</p>
-        </div>
-      </article>
-
-      <article class="project-full-card reveal" data-category="video">
-        <div class="project-full-media">
-          <img src="images/projects/plot-02.jpg" alt="YouTube Promo Video" onerror="this.parentElement.classList.add('img-fallback')">
-          <span class="status-tag status-completed">Completed</span>
-        </div>
-        <div class="project-full-body">
-          <span class="project-tag">Video Editing</span>
+        <div class="reel-play-overlay">▶</div>
+        <div class="reel-info-bottom">
           <h3>Corporate Motion Graphics Promo</h3>
-          <p>4K Video Editing &amp; Animation</p>
+          <p>2D/3D Animation &amp; Sound Design</p>
         </div>
       </article>
 
-      <article class="project-full-card reveal" data-category="web">
-        <div class="project-full-media">
-          <img src="images/projects/villa-02.jpg" alt="E-Commerce Store" onerror="this.parentElement.classList.add('img-fallback')">
-          <span class="status-tag status-ongoing">Ongoing</span>
+      <article class="reel-card reveal">
+        <div class="reel-header-tags">
+          <span class="badge-4k">4K Ultra</span>
+          <span class="chip-tag" style="padding:2px 8px; font-size:0.68rem;">YouTube Long-Form</span>
         </div>
-        <div class="project-full-body">
-          <span class="project-tag">Web Development</span>
-          <h3>Luxury E-Commerce Store</h3>
-          <p>WooCommerce &amp; Payment Gateway Integration</p>
-        </div>
-      </article>
-
-      <article class="project-full-card reveal" data-category="social">
-        <div class="project-full-media">
-          <img src="images/projects/commercial-02.jpg" alt="Social Media Growth" onerror="this.parentElement.classList.add('img-fallback')">
-          <span class="status-tag status-completed">Completed</span>
-        </div>
-        <div class="project-full-body">
-          <span class="project-tag">Social Media</span>
-          <h3>Restaurant Brand Growth Campaign</h3>
-          <p>Social Media Handling &amp; Content Planning</p>
+        <div class="reel-play-overlay">▶</div>
+        <div class="reel-info-bottom">
+          <h3>Brand Documentary &amp; Story</h3>
+          <p>Cinematic Editing &amp; Pacing</p>
         </div>
       </article>
+    </div>
+  </div>
+</section>
 
+<!-- ============ 💻 2. WEBSITE DEVELOPMENT INDUSTRY HUB ============ -->
+<section class="industry-hub-section alt" id="hub-web">
+  <div class="container">
+    <div class="industry-hub-header reveal">
+      <span class="industry-badge">💻 Industry 02 &bull; Website Development</span>
+      <h2 class="section-heading">High-Performance Custom Websites &amp; Portals</h2>
+      <p class="section-sub">Fast, mobile-responsive web development, landing pages, WordPress CMS, and WooCommerce e-commerce stores.</p>
+
+      <div class="sub-category-chips">
+        <span class="chip-tag">Business Websites</span>
+        <span class="chip-tag">Landing Pages</span>
+        <span class="chip-tag">WordPress Development</span>
+        <span class="chip-tag">E-Commerce (WooCommerce)</span>
+        <span class="chip-tag">Website Maintenance &amp; Speed</span>
+      </div>
     </div>
 
-    <p class="no-results" id="noResults" hidden>No projects found in this category yet — check back soon.</p>
+    <div class="web-hub-grid">
+      <article class="browser-mockup reveal">
+        <div class="browser-top-bar">
+          <div class="browser-dots">
+            <span class="browser-dot dot-red"></span>
+            <span class="browser-dot dot-yellow"></span>
+            <span class="browser-dot dot-green"></span>
+          </div>
+          <div class="browser-url-bar">https://corporate-portal.rajapriyagroup.com</div>
+        </div>
+        <div class="browser-body">
+          <img src="images/projects/villa-01.jpg" alt="Corporate Portal Preview" onerror="this.parentElement.classList.add('img-fallback')">
+        </div>
+        <div class="browser-footer">
+          <h3>Corporate Business Portal</h3>
+          <p>Full-stack responsive corporate platform with client portal and analytics.</p>
+          <div class="tech-stack-pills">
+            <span class="tech-pill">⚡ 99/100 Speed</span>
+            <span class="tech-pill">Full-Stack</span>
+            <span class="tech-pill">Responsive UI</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="browser-mockup reveal">
+        <div class="browser-top-bar">
+          <div class="browser-dots">
+            <span class="browser-dot dot-red"></span>
+            <span class="browser-dot dot-yellow"></span>
+            <span class="browser-dot dot-green"></span>
+          </div>
+          <div class="browser-url-bar">https://luxury-store.rajapriyagroup.com</div>
+        </div>
+        <div class="browser-body">
+          <img src="images/projects/villa-02.jpg" alt="E-Commerce Store Preview" onerror="this.parentElement.classList.add('img-fallback')">
+        </div>
+        <div class="browser-footer">
+          <h3>Luxury E-Commerce Store</h3>
+          <p>Custom WooCommerce online store with payment gateway and inventory tracking.</p>
+          <div class="tech-stack-pills">
+            <span class="tech-pill">WooCommerce</span>
+            <span class="tech-pill">Payment Gateway</span>
+            <span class="tech-pill">WordPress</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 🚀 3. BRAND PROMOTIONS INDUSTRY HUB ============ -->
+<section class="industry-hub-section" id="hub-brand">
+  <div class="container">
+    <div class="industry-hub-header reveal">
+      <span class="industry-badge">🚀 Industry 03 &bull; Brand Promotions</span>
+      <h2 class="section-heading">Strategic Digital Marketing &amp; Lead Generation</h2>
+      <p class="section-sub">Data-driven performance marketing campaigns, brand identity strategies, and targeted lead funnels.</p>
+
+      <div class="sub-category-chips">
+        <span class="chip-tag">Brand Strategy</span>
+        <span class="chip-tag">Digital Marketing</span>
+        <span class="chip-tag">Performance Marketing</span>
+        <span class="chip-tag">Creative Campaigns</span>
+        <span class="chip-tag">Targeted Lead Generation</span>
+      </div>
+    </div>
+
+    <div class="brand-hub-grid">
+      <article class="case-study-card reveal">
+        <div class="metric-stat-box">
+          <div class="stat-number">+350%</div>
+          <div class="stat-label">Verified Leads</div>
+        </div>
+        <h3 style="color:#fff; font-family:var(--font-display); margin-bottom:8px;">Performance Ad Funnel Campaign</h3>
+        <p style="color:var(--color-gray); font-size:0.85rem;">Meta &amp; Google PPC ad setup generating high-converting customer inquiries.</p>
+      </article>
+
+      <article class="case-study-card reveal">
+        <div class="metric-stat-box">
+          <div class="stat-number">4.8x ROI</div>
+          <div class="stat-label">Campaign Revenue</div>
+        </div>
+        <h3 style="color:#fff; font-family:var(--font-display); margin-bottom:8px;">Omnichannel Brand Relaunch</h3>
+        <p style="color:var(--color-gray); font-size:0.85rem;">Complete brand identity makeover and multi-platform promotional launch.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 📱 4. SOCIAL MEDIA MANAGEMENT INDUSTRY HUB ============ -->
+<section class="industry-hub-section alt" id="hub-social">
+  <div class="container">
+    <div class="industry-hub-header reveal">
+      <span class="industry-badge">📱 Industry 04 &bull; Social Media Management</span>
+      <h2 class="section-heading">End-to-End Social Media Handling &amp; Growth</h2>
+      <p class="section-sub">Page management, strategic content calendars, post design, 4K Reels production, and community engagement.</p>
+
+      <div class="sub-category-chips">
+        <span class="chip-tag">Social Media Handling</span>
+        <span class="chip-tag">Content Planning</span>
+        <span class="chip-tag">Creative Post Design</span>
+        <span class="chip-tag">Reels &amp; Video Production</span>
+        <span class="chip-tag">Business Growth Campaigns</span>
+      </div>
+    </div>
+
+    <div class="social-hub-grid">
+      <article class="social-preview-card reveal">
+        <div class="insta-header-bar">
+          <span class="insta-handle">@rajapriyagroup.official</span>
+          <span class="chip-tag" style="padding:2px 8px; font-size:0.68rem; color:#51cf66; border-color:#51cf66;">🔥 1.2M Impressions</span>
+        </div>
+        <div class="insta-grid-mini">
+          <img src="images/projects/plot-01.jpg" alt="Post 1" onerror="this.parentElement.classList.add('img-fallback')">
+          <img src="images/projects/villa-01.jpg" alt="Post 2" onerror="this.parentElement.classList.add('img-fallback')">
+          <img src="images/projects/commercial-01.jpg" alt="Post 3" onerror="this.parentElement.classList.add('img-fallback')">
+          <img src="images/projects/plot-02.jpg" alt="Post 4" onerror="this.parentElement.classList.add('img-fallback')">
+          <img src="images/projects/villa-02.jpg" alt="Post 5" onerror="this.parentElement.classList.add('img-fallback')">
+          <img src="images/projects/commercial-02.jpg" alt="Post 6" onerror="this.parentElement.classList.add('img-fallback')">
+        </div>
+        <h3 style="color:#fff; font-family:var(--font-display); font-size:1.05rem; margin-bottom:4px;">Restaurant Brand Growth</h3>
+        <p style="color:var(--color-gray); font-size:0.82rem;">Content planning, 4K Reels production, and monthly page management.</p>
+      </article>
+    </div>
   </div>
 </section>
 
